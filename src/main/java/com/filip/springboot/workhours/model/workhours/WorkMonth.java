@@ -14,13 +14,13 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Accessors(chain = true)
-@Document(collection = "workweek")
-public class WorkWeek {
+@Document(collection = "workmonth")
+public class WorkMonth {
 
     @Id
     private String id;
 
     @DBRef(lazy = true)
-    private Set<Workday> workdays;
+    private Set<WorkWeek> workdays;
 
 }

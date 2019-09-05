@@ -7,24 +7,29 @@ import com.filip.springboot.workhours.model.bus.Trip;
 import com.filip.springboot.workhours.model.bus.TripSchedule;
 import com.filip.springboot.workhours.model.user.Role;
 import com.filip.springboot.workhours.model.user.User;
+import com.filip.springboot.workhours.model.workhours.Workday;
 import com.filip.springboot.workhours.repository.bus.AgencyRepository;
 import com.filip.springboot.workhours.repository.bus.BusRepository;
 import com.filip.springboot.workhours.repository.bus.StopRepository;
 import com.filip.springboot.workhours.repository.bus.TripRepository;
 import com.filip.springboot.workhours.repository.bus.TripScheduleRepository;
-import com.filip.springboot.workhours.util.DateUtils;
-import com.starterkit.springboot.brs.model.bus.*;
-import com.starterkit.springboot.brs.repository.bus.*;
 import com.filip.springboot.workhours.repository.user.RoleRepository;
 import com.filip.springboot.workhours.repository.user.UserRepository;
+import com.filip.springboot.workhours.repository.workhours.WorkDayRepository;
+import com.filip.springboot.workhours.util.DateUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import javax.annotation.PostConstruct;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 
 @SpringBootApplication
 public class BusReservationSystemApplication {
@@ -33,11 +38,17 @@ public class BusReservationSystemApplication {
         SpringApplication.run(BusReservationSystemApplication.class, args);
     }
 
+    @PostConstruct
+    void started() {
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/Brussels"));
+    }
+
     @Bean
     CommandLineRunner init(RoleRepository roleRepository, UserRepository userRepository,
                            StopRepository stopRepository, AgencyRepository agencyRepository,
                            BusRepository busRepository, TripRepository tripRepository,
-                           TripScheduleRepository tripScheduleRepository) {
+                           TripScheduleRepository tripScheduleRepository,
+                           WorkDayRepository workDayRepository) {
         return args -> {
             //Create Admin and Passenger Roles
             Role adminRole = roleRepository.findByRole("ADMIN");
@@ -155,6 +166,77 @@ public class BusReservationSystemApplication {
                         .setAvailableSeats(trip.getBus().getCapacity());
                 tripScheduleRepository.save(tripSchedule);
             }
+
+            Workday workday = workDayRepository.findByIdQuery("1");
+            if(workday == null){
+                System.out.println("workday1 is null");
+                workday = createWorkday("1", LocalDate.of(2019, 9, 2), LocalTime.of(8, 28, 0), LocalTime.of(17, 22, 0), 8.4);
+                workDayRepository.save(workday);
+            }else{
+                System.out.println("workday1 is not null");
+            }
+
+//            Workday workday = workDayRepository.findById("1").get();
+//            if(workday == null){
+//                workday = createWorkday("1", LocalDate.of(2019, 9, 2), LocalTime.of(8, 28, 0), LocalTime.of(17, 22, 0), 8.4);
+//                workDayRepository.save(workday);
+//            }
+
+            //Workday workday2 = workDayRepository.findById("2").get();
+            Workday workday2 = workDayRepository.findByIdQuery("2");
+            if(workday2 == null){
+                System.out.println("workday2 is null");
+                workday2 = createWorkday("2", LocalDate.of(2019, 9, 3), LocalTime.of(7, 28, 0), LocalTime.of(16, 22, 0), 8);
+                workDayRepository.save(workday2);
+            }else{
+                System.out.println("workday2 is null");
+            }
+
+
+            List<Workday> workdays = workDayRepository.findAll();
+            for(Workday ww : workdays) {
+                System.out.println(ww.toString());
+            }
+
         };
+
+
+    }
+
+
+    private Workday createWorkday(
+            String id,
+            LocalDate date,
+            LocalTime hourArrived,
+            LocalTime hourLeft,
+            double brutoWorkedHours) {
+        Workday workday = new Workday();
+        workday.setId(id);
+        workday.setDate(date);
+        workday.setHourArrived(hourArrived);
+        workday.setHourLeft(hourLeft);
+
+        //
+
+        workday.setTotalAmountOfHoursWorkedToday();
+        workday.setMinimumHourToWorkTo();
+        workday.setMaximumHourToWorkTo();
+
+        //
+
+        workday.setBrutoWorkedHours(brutoWorkedHours);
+
+        //
+
+        workday.setWorkedHoursDecimal();
+        workday.setEightyFiveProcentOfWorkedHoursDecimal();
+        workday.setFifteenProcentOfWorkedHoursDecimal();
+        //workday.setHoursToWorkEachDay();
+        //workday.setMiddayBreak();
+        //workday.setVacationDayOrNot();
+
+        //
+
+        return workday;
     }
 }

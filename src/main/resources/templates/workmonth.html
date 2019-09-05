@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+</head>
+
+<body>
+
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid" layout:fragment="content" data-thymeleaf-file-used="workmonth.html">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">Profile</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                <li class="breadcrumb-item active">Profile</li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-12 col-xlg-12 col-md-12">
+            <div class="card">
+                <div class="card-block">
+
+                    <!--                    <h1>others</h1>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'EEEE dd MMMM yyyy')}"></p>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'E')}">Mon</p>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'EE')}">Mon</p>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'EEE')}">Mon</p>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'EEEE')}">Monday</p>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'EEEEE')}">M</p>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'M')}">9</p>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'MM')}">09</p>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'MMM')}">Sep</p>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'MMMM')}">September</p>-->
+                    <!--                    <p th:text="${#temporals.format(todaydate, 'MMMMM ')}">S</p>-->
+
+                    <!-- https://www.baeldung.com/dates-in-thymeleaf -->
+                    <!-- https://github.com/thymeleaf/thymeleaf-extras-java8time -->
+                    <!-- https://www.baeldung.com/java-add-hours-date -->
+                    <!-- https://www.boraji.com/java-8-localtime-example -->
+                    <!--                    <h1>Format ISO</h1>-->
+                    <!--                    <p th:text="${#dates.formatISO(standardDate)}"></p>-->
+                    <!--                    <p th:text="${#temporals.formatISO(localDateTime)}"></p>-->
+                    <!--                    <p th:text="${#temporals.formatISO(localDate)}"></p>-->
+                    <!--                    <p th:text="${#temporals.formatISO(timestamp)}"></p>-->
+
+                    <!--                    <h1>Format manually</h1>-->
+                    <!--                    <p th:text="${#dates.format(standardDate, 'dd-MM-yyyy HH:mm')}"></p>-->
+                    <!--                    <p th:text="${#temporals.format(localDateTime, 'dd-MM-yyyy HH:mm')}"></p>-->
+                    <!--                    <p th:text="${#temporals.format(localDate, 'MM-yyyy')}"></p>-->
+
+                    <!--                    <h1>Show only which day of a week</h1>-->
+                    <!--                    <p th:text="${#dates.day(standardDate)}"></p>-->
+                    <!--                    <p th:text="${#temporals.day(localDateTime)}"></p>-->
+                    <!--                    <p th:text="${#temporals.day(localDate)}"></p>-->
+
+                    <!--                    <h1>Show the name of the week day</h1>-->
+                    <!--                    <p th:text="${#dates.dayOfWeekName(standardDate)}"></p>-->
+                    <!--                    <p th:text="${#temporals.dayOfWeekName(localDateTime)}"></p>-->
+                    <!--                    <p th:text="${#temporals.dayOfWeekName(localDate)}"></p>-->
+
+                    <!--                    <h1>Show the second of the day</h1>-->
+                    <!--                    <p th:text="${#dates.second(standardDate)}"></p>-->
+                    <!--                    <p th:text="${#temporals.second(localDateTime)}"></p>-->
+
+
+<!--                    <table class="table">-->
+<!--                        <thead class="thead-dark">-->
+<!--                        <tr>-->
+<!--                            <th scope="col">dag</th>-->
+<!--                            <th scope="col">Uur komen</th>-->
+<!--                            <th scope="col">Uur gaan</th>-->
+<!--                            <th scope="col">totaal aantal uren</th>-->
+<!--                            <th scope="col">minimaal uur tot te werken</th>-->
+<!--                            <th scope="col">maximaal uur tot te werken</th>-->
+<!--                            <th scope="col">bruto werkuren</th>-->
+<!--                            <th scope="col">werkuren decimaal</th>-->
+<!--                            <th scope="col">85%</th>-->
+<!--                            <th scope="col">15%</th>-->
+<!--                            <th scope="col">uren per dag te werken</th>-->
+<!--                            <th scope="col">Button</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+
+<!--                        <tbody>-->
+
+<!--                        <tr th:if="${workdays.isEmpty()}">-->
+<!--                            <td colspan="11">No workdays available</td>-->
+<!--                        </tr>-->
+<!--                        <tr th:each="workday : ${workdays}"-->
+<!--                            th:class="${workday.vacationDayOrNot} ? 'orangetrue' : 'redfalse' "-->
+<!--                        >-->
+<!--                            <form action="#" method="post" class="form-horizontal form-material"-->
+<!--                                  th:action="@{/workmonth/edit}" th:object="${workday}">-->
+<!--                                &lt;!&ndash;                                  th:if="${workday.date.isAfter(#temporals.createNow()) || workday.date.isEqual(#temporals.createNow()) }">&ndash;&gt;-->
+<!--                                <th scope="row" th:text="${#temporals.format(workday.date, 'EEEE dd MMM yyyy')}">-->
+<!--                                    zondag 1-->
+<!--                                    september 2019-->
+<!--                                </th>-->
+<!--                                <td th:text="${#temporals.format(workday.hourArrived, 'HH:mm')}">-->
+<!--                                    <input type="date" th:field="*{hourArrived}" class="form-control form-control-line"-->
+<!--                                           name="hourArrived">-->
+<!--                                </td>-->
+<!--                                <td th:text="${#temporals.format(workday.hourLeft, 'HH:mm')}">-->
+<!--                                    <input type="date" th:field="*{hourLeft}" class="form-control form-control-line"-->
+<!--                                           name="hourArrived">-->
+<!--                                </td>-->
+<!--                                <td th:text="${#temporals.format(workday.getTotalAmountOfHoursWorkedToday(), 'HH:mm')}">-->
+<!--                                    04:24-->
+<!--                                </td>-->
+<!--                                <td th:text="${#temporals.format(workday.getMinimumHourToWorkTo(), 'HH:mm')}">15:58</td>-->
+<!--                                <td th:text="${#temporals.format(workday.getMaximumHourToWorkTo(), 'HH:mm')}">18:58</td>-->
+<!--                                <td th:text="${workday.brutoWorkedHours}">-->
+<!--                                    <input type="number" th:field="*{brutoWorkedHours}"-->
+<!--                                           class="form-control form-control-line" name="brutoWorkedHours">-->
+<!--                                </td>-->
+<!--                                <td th:text="${workday.getWorkedHoursDecimal()}">55.4</td>-->
+<!--                                <td th:text="${workday.getEightyFiveProcentOfWorkedHoursDecimal()}">12</td>-->
+<!--                                <td th:text="${workday.getFifteenProcentOfWorkedHoursDecimal()}">0000</td>-->
+<!--                                <td th:text="${#temporals.format(workday.getHoursToWorkEachDay(), 'HH:mm')}">074:00</td>-->
+<!--                                <td>-->
+<!--                                    <button class="btn btn-success">Update workhours</button>-->
+<!--                                </td>-->
+<!--                            </form>-->
+<!--                        </tr>-->
+
+<!--                        </tbody>-->
+<!--                    </table>-->
+
+                    <!--                    ------------------------ -->
+
+                    <form action="#" method="post" class="form-horizontal form-material"
+                          th:action="@{/workmonth/save/}"
+                          th:object="${form}">
+
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">dag</th>
+                                <th scope="col">Uur komen</th>
+                                <th scope="col">Uur gaan</th>
+                                <th scope="col">totaal aantal uren</th>
+                                <th scope="col">minimaal uur tot te werken</th>
+                                <th scope="col">maximaal uur tot te werken</th>
+                                <th scope="col">bruto werkuren</th>
+                                <th scope="col">werkuren decimaal</th>
+                                <th scope="col">85%</th>
+                                <th scope="col">15%</th>
+                                <th scope="col">uren per dag te werken</th>
+                                <th scope="col">Button</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr th:each="wd2, stat : *{workdayList}">
+
+                                <td hidden="hidden">
+                                    <input hidden="hidden" type="hidden" th:field="*{workdayList[__${stat.index}__].id}"
+                                           class="form-control form-control-line"
+                                           name="id">
+                                </td>
+
+                                <th scope="row"
+                                    th:text="*{#temporals.format(workdayList[__${stat.index}__].date, 'EEEE dd MMM yyyy')}"></th>
+                                <td>
+                                    <input type="time" th:field="*{workdayList[__${stat.index}__].hourArrived}"
+                                           class="form-control form-control-line"
+                                           name="hourArrived">
+                                </td>
+                                <td>
+                                    <input type="time" th:field="*{workdayList[__${stat.index}__].hourLeft}"
+                                           class="form-control form-control-line"
+                                           name="hourLeft">
+                                </td>
+                                <td th:text="*{#temporals.format(workdayList[__${stat.index}__].getTotalAmountOfHoursWorkedToday(), 'HH:mm')}"></td>
+                                <td th:text="*{#temporals.format(workdayList[__${stat.index}__].getMinimumHourToWorkTo(), 'HH:mm')}">
+                                    15:58
+                                </td>
+                                <td th:text="*{#temporals.format(workdayList[__${stat.index}__].getMaximumHourToWorkTo(), 'HH:mm')}">
+                                    18:58
+                                </td>
+                                <td><input type="number" th:field="*{workdayList[__${stat.index}__].brutoWorkedHours}"
+                                           class="form-control form-control-line" name="brutoWorkedHours">
+                                </td>
+                                <td th:text="*{workdayList[__${stat.index}__].getWorkedHoursDecimal()}">55.4</td>
+                                <td th:text="*{workdayList[__${stat.index}__].getEightyFiveProcentOfWorkedHoursDecimal()}">
+                                    12
+                                </td>
+                                <td th:text="*{workdayList[__${stat.index}__].getFifteenProcentOfWorkedHoursDecimal()}">
+                                    0000
+                                </td>
+                                <td th:text="*{#temporals.format(workdayList[__${stat.index}__].getHoursToWorkEachDay(), 'HH:mm')}">
+                                    074:00
+                                </td>
+                                <td>
+                                    <button class="btn btn-success">Update wd2</button>
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+
+    </div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+</body>
+
+</html>

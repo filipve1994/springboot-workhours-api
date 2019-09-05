@@ -9,26 +9,23 @@ import com.filip.springboot.workhours.dto.model.bus.StopDto;
 import com.filip.springboot.workhours.dto.model.bus.TicketDto;
 import com.filip.springboot.workhours.dto.model.bus.TripDto;
 import com.filip.springboot.workhours.dto.model.bus.TripScheduleDto;
+import com.filip.springboot.workhours.dto.model.user.UserDto;
+import com.filip.springboot.workhours.exception.BRSException;
+import com.filip.springboot.workhours.exception.EntityType;
+import com.filip.springboot.workhours.exception.ExceptionType;
 import com.filip.springboot.workhours.model.bus.Agency;
 import com.filip.springboot.workhours.model.bus.Bus;
 import com.filip.springboot.workhours.model.bus.Stop;
 import com.filip.springboot.workhours.model.bus.Ticket;
 import com.filip.springboot.workhours.model.bus.Trip;
 import com.filip.springboot.workhours.model.bus.TripSchedule;
+import com.filip.springboot.workhours.model.user.User;
 import com.filip.springboot.workhours.repository.bus.AgencyRepository;
 import com.filip.springboot.workhours.repository.bus.BusRepository;
 import com.filip.springboot.workhours.repository.bus.StopRepository;
 import com.filip.springboot.workhours.repository.bus.TicketRepository;
 import com.filip.springboot.workhours.repository.bus.TripRepository;
 import com.filip.springboot.workhours.repository.bus.TripScheduleRepository;
-import com.starterkit.springboot.brs.dto.model.bus.*;
-import com.filip.springboot.workhours.dto.model.user.UserDto;
-import com.filip.springboot.workhours.exception.BRSException;
-import com.filip.springboot.workhours.exception.EntityType;
-import com.filip.springboot.workhours.exception.ExceptionType;
-import com.starterkit.springboot.brs.model.bus.*;
-import com.filip.springboot.workhours.model.user.User;
-import com.starterkit.springboot.brs.repository.bus.*;
 import com.filip.springboot.workhours.repository.user.UserRepository;
 import com.filip.springboot.workhours.util.RandomStringUtil;
 import org.modelmapper.ModelMapper;
@@ -36,11 +33,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import static com.filip.springboot.workhours.exception.EntityType.*;
-import static com.filip.springboot.workhours.exception.ExceptionType.*;
+import static com.filip.springboot.workhours.exception.EntityType.AGENCY;
+import static com.filip.springboot.workhours.exception.EntityType.BUS;
+import static com.filip.springboot.workhours.exception.EntityType.STOP;
+import static com.filip.springboot.workhours.exception.EntityType.TRIP;
+import static com.filip.springboot.workhours.exception.EntityType.USER;
+import static com.filip.springboot.workhours.exception.ExceptionType.DUPLICATE_ENTITY;
+import static com.filip.springboot.workhours.exception.ExceptionType.ENTITY_EXCEPTION;
+import static com.filip.springboot.workhours.exception.ExceptionType.ENTITY_NOT_FOUND;
 
 /**
  * Created by Arpit Khandelwal.

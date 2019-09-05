@@ -6,7 +6,6 @@ import com.filip.springboot.workhours.dto.model.bus.StopDto;
 import com.filip.springboot.workhours.dto.model.bus.TicketDto;
 import com.filip.springboot.workhours.dto.model.bus.TripDto;
 import com.filip.springboot.workhours.dto.model.bus.TripScheduleDto;
-import com.starterkit.springboot.brs.dto.model.bus.*;
 import com.filip.springboot.workhours.dto.model.user.UserDto;
 
 import java.util.List;
