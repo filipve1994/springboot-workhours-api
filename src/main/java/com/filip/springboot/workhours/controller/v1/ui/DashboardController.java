@@ -285,13 +285,13 @@ public class DashboardController {
 
 
 
-        System.out.println("workday : " + workday.toString());
-        System.out.println("workday.getTotalAmountOfHoursWorkedToday : " + workday.getTotalAmountOfHoursWorkedToday());
-        System.out.println("workday.getMinimumHourToWorkTo : " + workday.getMinimumHourToWorkTo());
-        System.out.println("workday.getMaximumHourToWorkTo : " + workday.getMaximumHourToWorkTo());
-        System.out.println("workday.getWorkedHoursDecimal : " + workday.getWorkedHoursDecimal());
-        System.out.println("workday.getEightyFiveProcentOfWorkedHoursDecimal : " + workday.getEightyFiveProcentOfWorkedHoursDecimal());
-        System.out.println("workday.getFifteenProcentOfWorkedHoursDecimal : " + workday.getFifteenProcentOfWorkedHoursDecimal());
+        logger.info("workday : " + workday.toString());
+        logger.info("workday.getTotalAmountOfHoursWorkedToday : " + workday.getTotalAmountOfHoursWorkedToday());
+        logger.info("workday.getMinimumHourToWorkTo : " + workday.getMinimumHourToWorkTo());
+        logger.info("workday.getMaximumHourToWorkTo : " + workday.getMaximumHourToWorkTo());
+        logger.info("workday.getWorkedHoursDecimal : " + workday.getWorkedHoursDecimal());
+        logger.info("workday.getEightyFiveProcentOfWorkedHoursDecimal : " + workday.getEightyFiveProcentOfWorkedHoursDecimal());
+        logger.info("workday.getFifteenProcentOfWorkedHoursDecimal : " + workday.getFifteenProcentOfWorkedHoursDecimal());
 
         modelAndView.addObject("workday", workday);
         modelAndView.addObject("workdays", workdays);
@@ -299,7 +299,17 @@ public class DashboardController {
 
         WorkdayFormCommand workdayFormCommand = new WorkdayFormCommand();
         workdayFormCommand.setWorkdayList(workdays2);
-        logger.info(workdayFormCommand.toString());
+        logger.info("-----------------------------------------------------------------------------------------------");
+        logger.info("Workdayformcommand print");
+        logger.info("-----------------------------------------------------------------------------------------------");
+
+        for(Workday ws : workdayFormCommand.getWorkdayList()){
+            logger.info(ws.toString());
+        }
+        logger.info("-----------------------------------------------------------------------------------------------");
+
+        //logger.info(workdayFormCommand.toString());
+        logger.info("-----------------------------------------------------------------------------------------------");
 
 
         modelAndView.addObject("form", workdayFormCommand);

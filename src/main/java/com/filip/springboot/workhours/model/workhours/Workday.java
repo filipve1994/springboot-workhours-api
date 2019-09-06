@@ -40,16 +40,8 @@ public class Workday {
 
     public LocalTime getTotalAmountOfHoursWorkedToday() {
 
-        //System.out.println("getTotalAmountOfHoursWorkedToday calc workday");
-
-        //System.out.println("gethourleft : " + getHourLeft() + " - gethourarrived : " + getHourArrived());
-
-        //return totalAmountOfHoursWorkedToday;
         Duration between = Duration.between(getHourArrived(), getHourLeft());
         long seconds = between.getSeconds();
-//        System.out.println("duration between : " + seconds);
-//        int seconds2 = (int) between.getSeconds();
-//        System.out.println("duration between : " + seconds2);
 
         int p1 = (int) (seconds % 60);
         int p2 = (int) (seconds / 60);
@@ -57,21 +49,13 @@ public class Workday {
 
         p2 = p2 / 60;
 
-        //System.out.println("HH:MM:SS - " + p2 + ":" + p3 + ":" + p1);
-
-        LocalTime ll = LocalTime.of(p2, p3, p1);
-
-        return ll;
+        return LocalTime.of(p2, p3, p1);
     }
 
     public void setTotalAmountOfHoursWorkedToday() {
-        //System.out.println("gethourleft : " + getHourLeft() + " - gethourarrived : " + getHourArrived());
 
         Duration between = Duration.between(getHourArrived(), getHourLeft());
         long seconds = between.getSeconds();
-        //System.out.println("duration between : " + seconds);
-        //int seconds2 = (int) between.getSeconds();
-        //System.out.println("duration between : " + seconds2);
 
         int p1 = (int) (seconds % 60);
         int p2 = (int) (seconds / 60);
@@ -79,11 +63,7 @@ public class Workday {
 
         p2 = p2 / 60;
 
-        //System.out.println("HH:MM:SS - " + p2 + ":" + p3 + ":" + p1);
-
-        LocalTime ll = LocalTime.of(p2, p3, p1);
-
-        this.totalAmountOfHoursWorkedToday = ll;
+        this.totalAmountOfHoursWorkedToday = LocalTime.of(p2, p3, p1);
     }
 
     private LocalTime minimumHourToWorkTo;

@@ -1,5 +1,6 @@
 package com.filip.springboot.workhours.config;
 
+import com.filip.springboot.workhours.util.DateUtils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.NamingConventions;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,11 @@ public class BrsConfiguration {
     @Bean
     public Java8TimeDialect java8TimeDialect() {
         return new Java8TimeDialect();
+    }
+
+    @Bean(name = "dateutils")
+    public DateUtils dateUtils(){
+        return new DateUtils();
     }
 
     @Bean
