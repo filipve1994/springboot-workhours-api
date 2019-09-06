@@ -7,6 +7,8 @@ import com.filip.springboot.workhours.model.bus.Trip;
 import com.filip.springboot.workhours.model.bus.TripSchedule;
 import com.filip.springboot.workhours.model.user.Role;
 import com.filip.springboot.workhours.model.user.User;
+import com.filip.springboot.workhours.model.workhours.WorkMonth;
+import com.filip.springboot.workhours.model.workhours.WorkWeek;
 import com.filip.springboot.workhours.model.workhours.Workday;
 import com.filip.springboot.workhours.repository.bus.AgencyRepository;
 import com.filip.springboot.workhours.repository.bus.BusRepository;
@@ -16,6 +18,8 @@ import com.filip.springboot.workhours.repository.bus.TripScheduleRepository;
 import com.filip.springboot.workhours.repository.user.RoleRepository;
 import com.filip.springboot.workhours.repository.user.UserRepository;
 import com.filip.springboot.workhours.repository.workhours.WorkDayRepository;
+import com.filip.springboot.workhours.repository.workhours.WorkMonthRepository;
+import com.filip.springboot.workhours.repository.workhours.WorkWeekRepository;
 import com.filip.springboot.workhours.util.DateUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -48,7 +52,9 @@ public class BusReservationSystemApplication {
                            StopRepository stopRepository, AgencyRepository agencyRepository,
                            BusRepository busRepository, TripRepository tripRepository,
                            TripScheduleRepository tripScheduleRepository,
-                           WorkDayRepository workDayRepository) {
+                           WorkDayRepository workDayRepository,
+                           WorkWeekRepository workWeekRepository,
+                           WorkMonthRepository workMonthRepository) {
         return args -> {
             //Create Admin and Passenger Roles
             Role adminRole = roleRepository.findByRole("ADMIN");
@@ -171,33 +177,37 @@ public class BusReservationSystemApplication {
 
 
             List<Workday> workdays = workDayRepository.findAll();
-            for(Workday ww : workdays) {
+            for (Workday ww : workdays) {
                 System.out.println(ww.toString());
             }
+
+            createSampleWorkWeeks(workWeekRepository, workDayRepository);
+
+            createSampleWorkMonths(workMonthRepository, workWeekRepository);
 
         };
 
 
     }
 
-    private void createSampleWorkdays(WorkDayRepository workDayRepository){
+    private void createSampleWorkdays(WorkDayRepository workDayRepository) {
         //zondag 1 september 2019
         Workday workday1 = workDayRepository.findByIdQuery("1");
-        if(workday1 == null){
+        if (workday1 == null) {
             System.out.println("workday1 is null");
             workday1 = createWorkday(
                     "1",
                     LocalDate.of(2019, 9, 1),
                     LocalTime.of(0, 0, 0),
-                    LocalTime.of(0,0, 0),
+                    LocalTime.of(0, 0, 0),
                     0);
             workDayRepository.save(workday1);
-        }else{
+        } else {
             System.out.println("workday1 is not null");
         }
 
         Workday workday2 = workDayRepository.findByIdQuery("2");
-        if(workday2 == null){
+        if (workday2 == null) {
             System.out.println("workday2 is null");
             workday2 = createWorkday(
                     "2",
@@ -206,93 +216,151 @@ public class BusReservationSystemApplication {
                     LocalTime.of(17, 22, 0),
                     8.4);
             workDayRepository.save(workday2);
-        }else{
+        } else {
             System.out.println("workday2 is not null");
         }
 
         Workday workday3 = workDayRepository.findByIdQuery("3");
-        if(workday3 == null){
+        if (workday3 == null) {
             System.out.println("workday3 is null");
             workday3 = createWorkday(
                     "3",
                     LocalDate.of(2019, 9, 3),
-                    LocalTime.of(8,17,0),
-                    LocalTime.of(17,21,0),
+                    LocalTime.of(8, 17, 0),
+                    LocalTime.of(17, 21, 0),
                     8.55);
             workDayRepository.save(workday3);
-        }else{
+        } else {
             System.out.println("workday3 is not null");
         }
 
         Workday workday4 = workDayRepository.findByIdQuery("4");
-        if(workday4 == null){
+        if (workday4 == null) {
             System.out.println("workday4 is null");
             workday4 = createWorkday(
                     "4",
                     LocalDate.of(2019, 9, 4),
-                    LocalTime.of(7,6,0),
-                    LocalTime.of(16,23,0),
+                    LocalTime.of(7, 6, 0),
+                    LocalTime.of(16, 23, 0),
                     8.77);
             workDayRepository.save(workday4);
-        }else{
+        } else {
             System.out.println("workday4 is not null");
         }
 
         Workday workday5 = workDayRepository.findByIdQuery("5");
-        if(workday5 == null){
+        if (workday5 == null) {
             System.out.println("workday5 is null");
             workday5 = createWorkday(
                     "5",
                     LocalDate.of(2019, 9, 5),
-                    LocalTime.of(8,40,0),
-                    LocalTime.of(17,21,0),
+                    LocalTime.of(8, 40, 0),
+                    LocalTime.of(17, 21, 0),
                     8.19);
             workDayRepository.save(workday5);
-        }else{
+        } else {
             System.out.println("workday5 is not null");
         }
 
         Workday workday6 = workDayRepository.findByIdQuery("6");
-        if(workday6 == null){
+        if (workday6 == null) {
             System.out.println("workday6 is null");
             workday6 = createWorkday(
                     "6",
                     LocalDate.of(2019, 9, 6),
-                    LocalTime.of(8,4,0),
-                    LocalTime.of(0,0,0),
+                    LocalTime.of(8, 4, 0),
+                    LocalTime.of(0, 0, 0),
                     0);
             workDayRepository.save(workday6);
-        }else{
+        } else {
             System.out.println("workday6 is not null");
         }
 
         Workday workday7 = workDayRepository.findByIdQuery("7");
-        if(workday7 == null){
+        if (workday7 == null) {
             System.out.println("workday7 is null");
             workday7 = createWorkday(
                     "7",
                     LocalDate.of(2019, 9, 7),
                     LocalTime.of(0, 0, 0),
-                    LocalTime.of(0,0, 0),
+                    LocalTime.of(0, 0, 0),
                     0);
             workDayRepository.save(workday7);
-        }else{
+        } else {
             System.out.println("workday7 is not null");
         }
 
         Workday workday8 = workDayRepository.findByIdQuery("8");
-        if(workday8 == null){
+        if (workday8 == null) {
             System.out.println("workday8 is null");
             workday8 = createWorkday(
                     "8",
                     LocalDate.of(2019, 9, 8),
                     LocalTime.of(0, 0, 0),
-                    LocalTime.of(0,0, 0),
+                    LocalTime.of(0, 0, 0),
                     0);
             workDayRepository.save(workday8);
-        }else{
+        } else {
             System.out.println("workday8 is not null");
         }
+    }
+
+    private void createSampleWorkWeeks(WorkWeekRepository workWeekRepository, WorkDayRepository workDayRepository) {
+
+        //zondag 1 september 2019
+        Workday workday1 = workDayRepository.findByIdQuery("1");
+
+        List<Workday> workdays = workDayRepository.findAll();
+
+        WorkWeek workWeek1 = workWeekRepository.findByIdQuery("1");
+
+        if (workWeek1 == null) {
+            System.out.println("workWeek1 is null");
+            workWeek1 = createWorkWeek("1", workdays);
+            workWeekRepository.save(workWeek1);
+        } else {
+            System.out.println("workWeek1 is not null");
+        }
+
+
+    }
+
+    private void createSampleWorkMonths(WorkMonthRepository workMonthRepository, WorkWeekRepository workWeekRepository) {
+
+        //zondag 1 september 2019
+        WorkWeek workWeek1 = workWeekRepository.findByIdQuery("1");
+
+        List<WorkWeek> workWeeks = workWeekRepository.findAll();
+
+        WorkMonth workMonth1 = workMonthRepository.findByIdQuery("1");
+
+        if (workMonth1 == null) {
+            System.out.println("workMonth1 is null");
+            workMonth1 = createWorkMonth("1", workWeeks);
+            workMonthRepository.save(workMonth1);
+        } else {
+            System.out.println("workMonth1 is not null");
+        }
+
+
+    }
+
+    private WorkMonth createWorkMonth(String id, List<WorkWeek> workWeeks) {
+        WorkMonth workMonth = new WorkMonth();
+        workMonth.setId(id);
+        workMonth.setWorkweeks(workWeeks);
+
+        return workMonth;
+    }
+
+    private WorkWeek createWorkWeek(String id, List<Workday> workdays) {
+
+        WorkWeek workWeek = new WorkWeek();
+        workWeek.setId(id);
+        workWeek.setWorkdays(workdays);
+
+        return workWeek;
+
     }
 
 

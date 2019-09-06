@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -20,7 +21,7 @@ public class WorkMonth {
     @Id
     private String id;
 
-    @DBRef(lazy = true)
-    private Set<WorkWeek> workdays;
+    //@DBRef(lazy = true)
+    private List<WorkWeek> workweeks;
 
 }
