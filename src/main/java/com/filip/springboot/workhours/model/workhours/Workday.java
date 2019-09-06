@@ -1,11 +1,14 @@
 package com.filip.springboot.workhours.model.workhours;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.filip.springboot.workhours.util.DateUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,6 +28,8 @@ import java.time.LocalTime;
 @Document(collection = "workday")
 public class Workday {
 
+    private static final Logger logger = LoggerFactory.getLogger(Workday.class);
+
     @Id
     private String id;
 
@@ -40,58 +45,119 @@ public class Workday {
 
     public LocalTime getTotalAmountOfHoursWorkedToday() {
 
-        Duration between = Duration.between(getHourArrived(), getHourLeft());
-        long seconds = between.getSeconds();
+        if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
+            logger.info("getDate() : " + getDate() + " is weekend day");
+            return LocalTime.of(0, 0, 0);
+        } else {
 
-        int p1 = (int) (seconds % 60);
-        int p2 = (int) (seconds / 60);
-        int p3 = p2 % 60;
+            if (getHourArrived().isBefore(getHourLeft())) {
+                Duration between = Duration.between(getHourArrived(), getHourLeft());
+                long seconds = between.getSeconds();
 
-        p2 = p2 / 60;
+                int p1 = (int) (seconds % 60);
+                int p2 = (int) (seconds / 60);
+                int p3 = p2 % 60;
 
-        return LocalTime.of(p2, p3, p1);
+                p2 = p2 / 60;
+
+                return LocalTime.of(p2, p3, p1);
+            } else {
+                return LocalTime.of(0, 0, 0);
+            }
+        }
+
     }
 
     public void setTotalAmountOfHoursWorkedToday() {
 
-        Duration between = Duration.between(getHourArrived(), getHourLeft());
-        long seconds = between.getSeconds();
+        if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
 
-        int p1 = (int) (seconds % 60);
-        int p2 = (int) (seconds / 60);
-        int p3 = p2 % 60;
+            logger.info("getDate() : " + getDate() + " is weekend day");
 
-        p2 = p2 / 60;
+            this.totalAmountOfHoursWorkedToday = LocalTime.of(0, 0, 0);
 
-        this.totalAmountOfHoursWorkedToday = LocalTime.of(p2, p3, p1);
+        } else {
+            if (getHourArrived().isBefore(getHourLeft())) {
+                Duration between = Duration.between(getHourArrived(), getHourLeft());
+                long seconds = between.getSeconds();
+
+                int p1 = (int) (seconds % 60);
+                int p2 = (int) (seconds / 60);
+                int p3 = p2 % 60;
+
+                p2 = p2 / 60;
+
+                this.totalAmountOfHoursWorkedToday = LocalTime.of(p2, p3, p1);
+
+            } else {
+                this.totalAmountOfHoursWorkedToday = LocalTime.of(0, 0, 0);
+            }
+        }
     }
 
     private LocalTime minimumHourToWorkTo;
 
     public LocalTime getMinimumHourToWorkTo() {
         //return minimumHourToWorkTo;
+
+        if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
+
+            logger.info("getDate() : " + getDate() + " is weekend day");
+            return LocalTime.of(0, 0, 0);
+
+        }
+
         LocalTime newTime = getHourArrived().plusHours(8);
         return newTime.plusMinutes(30);
     }
 
     public void setMinimumHourToWorkTo() {
+        if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
+
+            logger.info("getDate() : " + getDate() + " is weekend day");
+
+            this.minimumHourToWorkTo = LocalTime.of(0, 0, 0);
+
+
+        }
+
 
         LocalTime newTime = getHourArrived().plusHours(8);
         this.minimumHourToWorkTo = newTime.plusMinutes(30);
+
     }
 
     private LocalTime maximumHourToWorkTo;
 
     public LocalTime getMaximumHourToWorkTo() {
         //return maximumHourToWorkTo;
+
+        if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
+
+            logger.info("getDate() : " + getDate() + " is weekend day");
+
+            return LocalTime.of(0, 0, 0);
+
+        }
+
         LocalTime newTime = getHourArrived().plusHours(9);
         return newTime.plusMinutes(30);
+
     }
 
     public void setMaximumHourToWorkTo() {
 
+        if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
+
+            logger.info("getDate() : " + getDate() + " is weekend day");
+
+            this.maximumHourToWorkTo = LocalTime.of(0, 0, 0);
+
+        }
+
         LocalTime newTime = getHourArrived().plusHours(9);
         this.maximumHourToWorkTo = newTime.plusMinutes(30);
+
     }
 
 

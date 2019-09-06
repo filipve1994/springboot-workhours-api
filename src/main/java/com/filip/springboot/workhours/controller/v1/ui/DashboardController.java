@@ -369,11 +369,8 @@ public class DashboardController {
 
         List<Workday> workdayListFromForm = form.getWorkdayList();
         for (Workday ww : workdayListFromForm) {
-        //List<WorkdayDto> workdayListFromForm = form.getWorkdayList();
-//        for (WorkdayDto ww : workdayListFromForm) {
             logger.info("from FORM list objects");
 
-            logger.info(ww.toString());
             logger.info("id : " + ww.getId());
 
             Workday workday2 = workDayRepository.findByIdQuery(ww.getId());

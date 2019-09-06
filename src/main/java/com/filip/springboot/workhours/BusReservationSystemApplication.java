@@ -216,9 +216,9 @@ public class BusReservationSystemApplication {
             workday3 = createWorkday(
                     "3",
                     LocalDate.of(2019, 9, 3),
-                    LocalTime.of(7, 28, 0),
-                    LocalTime.of(16, 22, 0),
-                    8);
+                    LocalTime.of(8,17,0),
+                    LocalTime.of(17,21,0),
+                    8.55);
             workDayRepository.save(workday3);
         }else{
             System.out.println("workday3 is not null");
@@ -230,9 +230,9 @@ public class BusReservationSystemApplication {
             workday4 = createWorkday(
                     "4",
                     LocalDate.of(2019, 9, 4),
-                    LocalTime.of(7, 28, 0),
-                    LocalTime.of(16, 22, 0),
-                    8);
+                    LocalTime.of(7,6,0),
+                    LocalTime.of(16,23,0),
+                    8.77);
             workDayRepository.save(workday4);
         }else{
             System.out.println("workday4 is not null");
@@ -244,9 +244,9 @@ public class BusReservationSystemApplication {
             workday5 = createWorkday(
                     "5",
                     LocalDate.of(2019, 9, 5),
-                    LocalTime.of(7, 28, 0),
-                    LocalTime.of(16, 22, 0),
-                    8);
+                    LocalTime.of(8,40,0),
+                    LocalTime.of(17,21,0),
+                    8.19);
             workDayRepository.save(workday5);
         }else{
             System.out.println("workday5 is not null");
@@ -258,9 +258,9 @@ public class BusReservationSystemApplication {
             workday6 = createWorkday(
                     "6",
                     LocalDate.of(2019, 9, 6),
-                    LocalTime.of(7, 28, 0),
-                    LocalTime.of(16, 22, 0),
-                    8);
+                    LocalTime.of(8,4,0),
+                    LocalTime.of(0,0,0),
+                    0);
             workDayRepository.save(workday6);
         }else{
             System.out.println("workday6 is not null");
@@ -272,9 +272,9 @@ public class BusReservationSystemApplication {
             workday7 = createWorkday(
                     "7",
                     LocalDate.of(2019, 9, 7),
-                    LocalTime.of(7, 28, 0),
-                    LocalTime.of(16, 22, 0),
-                    8);
+                    LocalTime.of(0, 0, 0),
+                    LocalTime.of(0,0, 0),
+                    0);
             workDayRepository.save(workday7);
         }else{
             System.out.println("workday7 is not null");

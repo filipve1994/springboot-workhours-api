@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout"
 >
 
 <head>
@@ -17,10 +17,10 @@
     <!-- ============================================================== -->
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor m-b-0 m-t-0">Profile</h3>
+            <h3 class="text-themecolor m-b-0 m-t-0">Workmonth</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="home">Home</a></li>
-                <li class="breadcrumb-item active">Profile</li>
+                <li class="breadcrumb-item active">Workmonth</li>
             </ol>
         </div>
     </div>
@@ -50,12 +50,8 @@
                         <table class="table">
                             <thead class="thead-dark">
                             <tr>
-                                <th scope="col">try1</th>
-                                <th scope="col">try2</th>
-                                <th scope="col">try3</th>
                                 <th scope="col">try4</th>
                                 <th scope="col">try5</th>
-                                <th scope="col">try6</th>
 
                                 <th scope="col">dag</th>
                                 <th scope="col">Uur komen</th>
@@ -78,10 +74,6 @@
                             <tr th:each="wd2, stat : *{workdayList}"
                                 th:with="workdayfilip2=*{workdayList[__${stat.index}__].date}">
 
-                                <td th:text="${@dateUtils.checkIfDayIsWeekendDay(#temporals.createNow())}"></td>
-                                <td th:text="${@dateUtils.checkIfDayIsWeekendDay(#temporals.create(2019,9,1))}"></td>
-                                <td th:text="*{workdayList[__${stat.index}__].date}"></td>
-
                                 <td th:with="workdayfilip=*{workdayList[__${stat.index}__].date}">
                                     <span th:text="${workdayfilip}"></span>
                                 </td>
@@ -89,13 +81,6 @@
                                     th:text="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip)}"
                                     th:class="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip)} ? 'greentrue bg-success' : 'redfalse bg-danger'"></td>
 
-                                <!-- tryout fil -->
-                                <td>
-                                    <span th:if="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">00:00</span>
-                                    <span th:unless="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}"
-                                          th:text="*{#temporals.format(workdayList[__${stat.index}__].getMinimumHourToWorkTo(), 'HH:mm')}"></span>
-
-                                </td>
 
                                 <td hidden="hidden">
                                     <input hidden="hidden" type="hidden" th:field="*{workdayList[__${stat.index}__].id}"
@@ -106,56 +91,86 @@
                                 <th scope="row"
                                     th:text="*{#temporals.format(workdayList[__${stat.index}__].date, 'EEEE dd MMM yyyy')}">
                                 </th>
-                                <td>
-                                    <input type="time" th:field="*{workdayList[__${stat.index}__].hourArrived}"
-                                           class="form-control form-control-line"
-                                           name="hourArrived">
+
+<!--                                <td>-->
+<!--                                    <input type="time" th:field="*{workdayList[__${stat.index}__].hourArrived}"-->
+<!--                                           class="form-control form-control-line"-->
+<!--                                           name="hourArrived">-->
+<!--                                </td>-->
+
+                                <td data-info-cell="hourArrived">
+                                    <span th:if="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">00:00</span>
+                                    <span th:unless="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">
+                                        <input type="time" th:field="*{workdayList[__${stat.index}__].hourArrived}"
+                                               class="form-control form-control-line"
+                                               name="hourArrived">
+                                    </span>
                                 </td>
-                                <td>
-                                    <input type="time" th:field="*{workdayList[__${stat.index}__].hourLeft}"
-                                           class="form-control form-control-line"
-                                           name="hourLeft">
+
+<!--                                <td>-->
+<!--                                    <input type="time" th:field="*{workdayList[__${stat.index}__].hourLeft}"-->
+<!--                                           class="form-control form-control-line"-->
+<!--                                           name="hourLeft">-->
+<!--                                </td>-->
+
+                                <td data-info-cell="hourLeft">
+                                    <span th:if="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">00:00</span>
+                                    <span th:unless="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">
+                                         <input type="time" th:field="*{workdayList[__${stat.index}__].hourLeft}"
+                                                class="form-control form-control-line"
+                                                name="hourLeft">
+                                    </span>
                                 </td>
+
                                 <td th:text="*{#temporals.format(workdayList[__${stat.index}__].getTotalAmountOfHoursWorkedToday(), 'HH:mm')}"></td>
 
-
-                                <!--                                <td th:text="*{#temporals.format(workdayList[__${stat.index}__].getMinimumHourToWorkTo(), 'HH:mm')}"></td>-->
-
-                                <td>
+                                <td data-info-cell="minimum hour to work to" >
                                     <span th:if="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">00:00</span>
                                     <span th:unless="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}"
                                           th:text="*{#temporals.format(workdayList[__${stat.index}__].getMinimumHourToWorkTo(), 'HH:mm')}"></span>
                                 </td>
 
-<!--                                <td th:text="*{#temporals.format(workdayList[__${stat.index}__].getMaximumHourToWorkTo(), 'HH:mm')}"></td>-->
-                                <td>
+                                <td data-info-cell="maximum hour to work to" >
                                     <span th:if="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">00:00</span>
                                     <span th:unless="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}"
                                           th:text="*{#temporals.format(workdayList[__${stat.index}__].getMaximumHourToWorkTo(), 'HH:mm')}"></span>
                                 </td>
 
 
-                                <td>
+<!--                                <td data-info-cell="bruto worked hours">-->
+<!--                                    <input type="number" th:field="*{workdayList[__${stat.index}__].brutoWorkedHours}"-->
+<!--                                           class="form-control form-control-line" name="brutoWorkedHours">-->
+<!--                                </td>-->
+
+                                <td data-info-cell="hourLeft">
+                                    <span th:if="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">00:00</span>
+                                    <span th:unless="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">
                                     <input type="number" th:field="*{workdayList[__${stat.index}__].brutoWorkedHours}"
                                            class="form-control form-control-line" name="brutoWorkedHours">
+                                    </span>
                                 </td>
-                                <td th:text="*{workdayList[__${stat.index}__].getWorkedHoursDecimal()}">55.4</td>
-                                <td th:text="*{workdayList[__${stat.index}__].getEightyFiveProcentOfWorkedHoursDecimal()}">
-                                    12
-                                </td>
-                                <td th:text="*{workdayList[__${stat.index}__].getFifteenProcentOfWorkedHoursDecimal()}">
-                                    0000
-                                </td>
-<!--                                <td th:text="*{#temporals.format(workdayList[__${stat.index}__].getHoursToWorkEachDay(), 'HH:mm')}">-->
-<!--                                </td>-->
-                                <td>
+
+                                <td data-info-cell="worked hours decimal"
+                                    th:text="*{workdayList[__${stat.index}__].getWorkedHoursDecimal()}"></td>
+
+                                <td data-info-cell="85 procent"
+                                    th:text="*{workdayList[__${stat.index}__].getEightyFiveProcentOfWorkedHoursDecimal()}"></td>
+
+                                <td data-info-cell="fifteen percent"
+                                    th:text="*{workdayList[__${stat.index}__].getFifteenProcentOfWorkedHoursDecimal()}"></td>
+
+                                <td data-info-cell="hours to work each day">
                                     <span th:if="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">00:00</span>
                                     <span th:unless="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}"
                                           th:text="*{#temporals.format(workdayList[__${stat.index}__].getHoursToWorkEachDay(), 'HH:mm')}"></span>
                                 </td>
 
-                                <td>
-                                    <button class="btn btn-success" th:disabled="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">Update wd2</button>
+                                <td data-info-cell="update button">
+                                    <span th:if="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">
+                                    </span>
+                                    <span th:unless="${@dateUtils.checkIfDayIsWeekendDay(workdayfilip2)}">
+                                    <button class="btn btn-success">Update wd2</button>
+                                    </span>
                                 </td>
                             </tr>
 
