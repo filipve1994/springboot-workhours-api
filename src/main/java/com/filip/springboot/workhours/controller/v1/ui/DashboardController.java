@@ -11,8 +11,10 @@ import com.filip.springboot.workhours.dto.model.bus.BusDto;
 import com.filip.springboot.workhours.dto.model.bus.StopDto;
 import com.filip.springboot.workhours.dto.model.bus.TripDto;
 import com.filip.springboot.workhours.dto.model.user.UserDto;
+import com.filip.springboot.workhours.model.workhours.WorkMonth;
 import com.filip.springboot.workhours.model.workhours.Workday;
 import com.filip.springboot.workhours.repository.workhours.WorkDayRepository;
+import com.filip.springboot.workhours.repository.workhours.WorkMonthRepository;
 import com.filip.springboot.workhours.service.BusReservationService;
 import com.filip.springboot.workhours.service.UserService;
 import org.slf4j.Logger;
@@ -34,6 +36,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -60,32 +63,6 @@ public class DashboardController {
         UserDto userDto = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("currentUser", userDto);
         modelAndView.addObject("userName", userDto.getFullName());
-
-        //-----------------------------------
-
-
-        modelAndView.addObject("standardDate", new Date());
-        modelAndView.addObject("localDateTime", LocalDateTime.now());
-        modelAndView.addObject("localDate", LocalDate.now());
-        modelAndView.addObject("timestamp", Instant.now());
-
-        //-----------------------------------
-
-        Workday workday = createWorkday("1", LocalDate.of(2019, 9, 2), LocalTime.of(8, 28, 0), LocalTime.of(17, 22, 0), 8.4);
-        Workday workday2 = createWorkday("2", LocalDate.of(2019, 9, 3), LocalTime.of(7, 28, 0), LocalTime.of(16, 22, 0), 8);
-        List<Workday> workdays = Arrays.asList(workday, workday2);
-
-        System.out.println("workday : " + workday.toString());
-        System.out.println("workday.getTotalAmountOfHoursWorkedToday : " + workday.getTotalAmountOfHoursWorkedToday());
-        System.out.println("workday.getMinimumHourToWorkTo : " + workday.getMinimumHourToWorkTo());
-        System.out.println("workday.getMaximumHourToWorkTo : " + workday.getMaximumHourToWorkTo());
-        System.out.println("workday.getWorkedHoursDecimal : " + workday.getWorkedHoursDecimal());
-        System.out.println("workday.getEightyFiveProcentOfWorkedHoursDecimal : " + workday.getEightyFiveProcentOfWorkedHoursDecimal());
-        System.out.println("workday.getFifteenProcentOfWorkedHoursDecimal : " + workday.getFifteenProcentOfWorkedHoursDecimal());
-
-        modelAndView.addObject("workday", workday);
-        modelAndView.addObject("workdays", workdays);
-
 
         return modelAndView;
     }
@@ -283,42 +260,30 @@ public class DashboardController {
         List<Workday> workdays = Arrays.asList(workday, workday2);
         List<Workday> workdays2 = workDayRepository.findAll();
 
-
-
-        logger.info("workday : " + workday.toString());
-        logger.info("workday.getTotalAmountOfHoursWorkedToday : " + workday.getTotalAmountOfHoursWorkedToday());
-        logger.info("workday.getMinimumHourToWorkTo : " + workday.getMinimumHourToWorkTo());
-        logger.info("workday.getMaximumHourToWorkTo : " + workday.getMaximumHourToWorkTo());
-        logger.info("workday.getWorkedHoursDecimal : " + workday.getWorkedHoursDecimal());
-        logger.info("workday.getEightyFiveProcentOfWorkedHoursDecimal : " + workday.getEightyFiveProcentOfWorkedHoursDecimal());
-        logger.info("workday.getFifteenProcentOfWorkedHoursDecimal : " + workday.getFifteenProcentOfWorkedHoursDecimal());
+        WorkMonth workMonth = workMonthRepository.findByIdQuery("10");
 
         modelAndView.addObject("workday", workday);
         modelAndView.addObject("workdays", workdays);
         modelAndView.addObject("workdays2", workdays2);
+        modelAndView.addObject("workMonth", workMonth);
 
         WorkdayFormCommand workdayFormCommand = new WorkdayFormCommand();
         workdayFormCommand.setWorkdayList(workdays2);
-        logger.info("-----------------------------------------------------------------------------------------------");
-        logger.info("Workdayformcommand print");
-        logger.info("-----------------------------------------------------------------------------------------------");
 
-        for(Workday ws : workdayFormCommand.getWorkdayList()){
-            logger.info(ws.toString());
-        }
-        logger.info("-----------------------------------------------------------------------------------------------");
-
-        //logger.info(workdayFormCommand.toString());
-        logger.info("-----------------------------------------------------------------------------------------------");
-
+        WorkdayFormCommand workdayFormCommand2 = new WorkdayFormCommand();
+        workdayFormCommand2.setWorkdayList(workMonth.getWorkdays());
 
         modelAndView.addObject("form", workdayFormCommand);
+        modelAndView.addObject("form2", workdayFormCommand2);
 
         return modelAndView;
     }
 
     @Autowired
     private WorkDayRepository workDayRepository;
+
+    @Autowired
+    private WorkMonthRepository workMonthRepository;
 
     @PostMapping(value = "/workmonth/edit/{id}")
     public String updateWorkMonth(@PathVariable("id") String id, @Valid Workday workday, BindingResult bindingResult) {
@@ -387,6 +352,55 @@ public class DashboardController {
 
             workDayRepository.save(workday);
         }
+
+        // workDayRepository.saveAll(form.getWorkdayList());
+
+        return "redirect:/workmonth";
+    }
+
+    @PostMapping(value = "/workmonth/save2/{id}")
+    public String updateWorkMonthPostSave2(@ModelAttribute WorkdayFormCommand form2, @PathVariable("id") String id, Model model) {
+        logger.info("updateWorkMonthPostSave2");
+
+        WorkMonth byIdQuery = workMonthRepository.findByIdQuery(id);
+        List<Workday> workdays = byIdQuery.getWorkdays();
+        logger.info("workdays from oktober : " + workdays.size());
+
+        List<Workday> workdayListFromForm = form2.getWorkdayList();
+
+        List<Workday> updatedWorkdays = new ArrayList<>();
+
+        for (Workday ww : workdayListFromForm) {
+            logger.info("from FORM2 list objects");
+
+            logger.info("id : " + ww.getId());
+
+            //for (Workday workday : workdays) {
+            for (int i = 0; i < workdays.size(); i++) {
+                Workday workday = workdays.get(i);
+                logger.info("second for loop : workday.getId : " + workday.getId() + " - workdayfromfrom.getId : " + ww.getId());
+                logger.info("workday.getId().equals(ww.getId()) : " + workday.getId().equals(ww.getId()));
+
+                if (workday.getId().equals(ww.getId())) {
+                    workday.setHourArrived(ww.getHourArrived());
+                    workday.setHourLeft(ww.getHourLeft());
+                    workday.setBrutoWorkedHours(ww.getBrutoWorkedHours());
+
+//                    workDayRepository.save(workday);
+
+                    updatedWorkdays.add(workday);
+
+                    workdays.remove(i);
+
+                    break;
+                }
+            }
+
+        }
+
+        byIdQuery.setWorkdays(updatedWorkdays);
+
+        workMonthRepository.save(byIdQuery);
 
         // workDayRepository.saveAll(form.getWorkdayList());
 

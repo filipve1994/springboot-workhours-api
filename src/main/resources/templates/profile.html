@@ -34,7 +34,7 @@
         <!-- Column -->
         <div class="col-lg-4 col-xlg-3 col-md-5">
             <div class="card">
-                <div class="card-block">
+                <div class="card-block card-body ">
                     <center class="m-t-30"><img src="/dashboard/assets/images/users/5.jpg" class="img-circle"
                                                 width="150"/>
                         <h4 class="card-title m-t-10" th:inline="text">[[${name}]]</h4>
@@ -53,7 +53,7 @@
         <!-- Column -->
         <div class="col-lg-4 col-xlg-3 col-md-7">
             <div class="card">
-                <div class="card-block">
+                <div class="card-block card-body ">
                     <form action="#" method="POST" class="form-horizontal form-material" th:action="@{/profile}" th:object="${profileForm}">
                         <div class="form-group">
                             <label for="firstName" class="col-md-12">First Name</label>
@@ -89,7 +89,7 @@
         <!-- Column -->
         <div class="col-lg-4 col-xlg-3 col-md-5">
             <div class="card">
-                <div class="card-block">
+                <div class="card-block card-body ">
                     <form action="#" method="POST" class="form-horizontal form-material" th:action="@{/password}" th:object="${passwordForm}">
                         <div class="form-group">
                             <label class="col-md-12">Email</label>

@@ -8,7 +8,6 @@ import com.filip.springboot.workhours.model.bus.TripSchedule;
 import com.filip.springboot.workhours.model.user.Role;
 import com.filip.springboot.workhours.model.user.User;
 import com.filip.springboot.workhours.model.workhours.WorkMonth;
-import com.filip.springboot.workhours.model.workhours.WorkWeek;
 import com.filip.springboot.workhours.model.workhours.Workday;
 import com.filip.springboot.workhours.repository.bus.AgencyRepository;
 import com.filip.springboot.workhours.repository.bus.BusRepository;
@@ -19,8 +18,9 @@ import com.filip.springboot.workhours.repository.user.RoleRepository;
 import com.filip.springboot.workhours.repository.user.UserRepository;
 import com.filip.springboot.workhours.repository.workhours.WorkDayRepository;
 import com.filip.springboot.workhours.repository.workhours.WorkMonthRepository;
-import com.filip.springboot.workhours.repository.workhours.WorkWeekRepository;
 import com.filip.springboot.workhours.util.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,6 +29,7 @@ import org.springframework.context.annotation.Bean;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -53,7 +54,6 @@ public class BusReservationSystemApplication {
                            BusRepository busRepository, TripRepository tripRepository,
                            TripScheduleRepository tripScheduleRepository,
                            WorkDayRepository workDayRepository,
-                           WorkWeekRepository workWeekRepository,
                            WorkMonthRepository workMonthRepository) {
         return args -> {
             //Create Admin and Passenger Roles
@@ -176,15 +176,9 @@ public class BusReservationSystemApplication {
             createSampleWorkdays(workDayRepository);
 
 
-            List<Workday> workdays = workDayRepository.findAll();
-            for (Workday ww : workdays) {
-                System.out.println(ww.toString());
-            }
+            createSampleWorkMonths(workMonthRepository, workDayRepository);
 
-            createSampleWorkWeeks(workWeekRepository, workDayRepository);
-
-            createSampleWorkMonths(workMonthRepository, workWeekRepository);
-
+            createFullWorkMonthWorkWeekWorkDaySamples(workMonthRepository, workDayRepository);
         };
 
 
@@ -269,7 +263,7 @@ public class BusReservationSystemApplication {
                     "6",
                     LocalDate.of(2019, 9, 6),
                     LocalTime.of(8, 4, 0),
-                    LocalTime.of(0, 0, 0),
+                    LocalTime.of(6, 0, 0),
                     0);
             workDayRepository.save(workday6);
         } else {
@@ -305,38 +299,16 @@ public class BusReservationSystemApplication {
         }
     }
 
-    private void createSampleWorkWeeks(WorkWeekRepository workWeekRepository, WorkDayRepository workDayRepository) {
+    private void createSampleWorkMonths(WorkMonthRepository workMonthRepository, WorkDayRepository workDayRepository) {
 
         //zondag 1 september 2019
-        Workday workday1 = workDayRepository.findByIdQuery("1");
-
         List<Workday> workdays = workDayRepository.findAll();
-
-        WorkWeek workWeek1 = workWeekRepository.findByIdQuery("1");
-
-        if (workWeek1 == null) {
-            System.out.println("workWeek1 is null");
-            workWeek1 = createWorkWeek("1", workdays);
-            workWeekRepository.save(workWeek1);
-        } else {
-            System.out.println("workWeek1 is not null");
-        }
-
-
-    }
-
-    private void createSampleWorkMonths(WorkMonthRepository workMonthRepository, WorkWeekRepository workWeekRepository) {
-
-        //zondag 1 september 2019
-        WorkWeek workWeek1 = workWeekRepository.findByIdQuery("1");
-
-        List<WorkWeek> workWeeks = workWeekRepository.findAll();
 
         WorkMonth workMonth1 = workMonthRepository.findByIdQuery("1");
 
         if (workMonth1 == null) {
             System.out.println("workMonth1 is null");
-            workMonth1 = createWorkMonth("1", workWeeks);
+            workMonth1 = createWorkMonth("1", workdays);
             workMonthRepository.save(workMonth1);
         } else {
             System.out.println("workMonth1 is not null");
@@ -345,24 +317,13 @@ public class BusReservationSystemApplication {
 
     }
 
-    private WorkMonth createWorkMonth(String id, List<WorkWeek> workWeeks) {
+    private WorkMonth createWorkMonth(String id, List<Workday> workdays) {
         WorkMonth workMonth = new WorkMonth();
         workMonth.setId(id);
-        workMonth.setWorkweeks(workWeeks);
+        workMonth.setWorkdays(workdays);
 
         return workMonth;
     }
-
-    private WorkWeek createWorkWeek(String id, List<Workday> workdays) {
-
-        WorkWeek workWeek = new WorkWeek();
-        workWeek.setId(id);
-        workWeek.setWorkdays(workdays);
-
-        return workWeek;
-
-    }
-
 
     private Workday createWorkday(
             String id,
@@ -399,4 +360,63 @@ public class BusReservationSystemApplication {
 
         return workday;
     }
+
+    private void createFullWorkMonthWorkWeekWorkDaySamples(WorkMonthRepository workMonthRepository, WorkDayRepository workDayRepository) {
+
+        logger.info("createFullWorkMonthWorkWeekWorkDaySamples");
+
+        int amountOfDaysOfMonthSeptember = DateUtils.getAmountOfDaysOfMonth(9, 2019);
+        int amountOfDaysOfMonthOktober = DateUtils.getAmountOfDaysOfMonth(10, 2019);
+        List<Workday> workdaysOktober = new ArrayList<>();
+        int amountOfDaysOfMonthNovember = DateUtils.getAmountOfDaysOfMonth(11, 2019);
+        int amountOfDaysOfMonthDecember = DateUtils.getAmountOfDaysOfMonth(12, 2019);
+
+
+        for (int i = 1; i <= amountOfDaysOfMonthSeptember; i++) {
+            LocalDate localDate = LocalDate.of(2019, 9, i);
+            logger.info(localDate.toString());
+        }
+
+        for (int i = 1; i <= amountOfDaysOfMonthOktober; i++) {
+            LocalDate localDate = LocalDate.of(2019, 10, i);
+            logger.info(localDate.toString());
+
+            Workday workday1 = new Workday();
+            System.out.println("workday" + i + " is null");
+            workday1 = createWorkday(
+                    Integer.toString(i),
+                    LocalDate.of(2019, 10, i),
+                    LocalTime.of(6, 0, 0),
+                    LocalTime.of(0, 0, 0),
+                    0);
+            //workDayRepository.save(workday1);
+
+            workdaysOktober.add(workday1);
+
+        }
+
+        WorkMonth workMonthOktober = new WorkMonth();
+        workMonthOktober.setId("10");
+        workMonthOktober.setWorkdays(workdaysOktober);
+        workMonthRepository.save(workMonthOktober);
+
+        WorkMonth workMonthOktoberAll = workMonthRepository.findByIdQuery("10");
+        for(Workday ws : workMonthOktoberAll.getWorkdays()) {
+            logger.info(ws.toString());
+        }
+
+
+        for (int i = 1; i <= amountOfDaysOfMonthNovember; i++) {
+            LocalDate localDate = LocalDate.of(2019, 11, i);
+            logger.info(localDate.toString());
+        }
+
+        for (int i = 1; i <= amountOfDaysOfMonthDecember; i++) {
+            LocalDate localDate = LocalDate.of(2019, 12, i);
+            logger.info(localDate.toString());
+        }
+    }
+
+    private static final Logger logger = LoggerFactory.getLogger(BusReservationSystemApplication.class);
+
 }

@@ -22,6 +22,6 @@ public class WorkMonth {
     private String id;
 
     //@DBRef(lazy = true)
-    private List<WorkWeek> workweeks;
+    private List<Workday> workdays;
 
 }

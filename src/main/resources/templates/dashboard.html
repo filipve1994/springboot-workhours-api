@@ -30,132 +30,13 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
 
-    <!-- Row -->
-    <div class="row">
-        <!-- Column -->
-        <div class="col-lg-12 col-md-12">
-            <div class="card">
-                <div class="card-block">
-                    <table class="table">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">dag</th>
-                            <th scope="col">Uur komen</th>
-                            <th scope="col">Uur gaan</th>
-                            <th scope="col">totaal aantal uren</th>
-                            <th scope="col">minimaal uur tot te werken</th>
-                            <th scope="col">maximaal uur tot te werken</th>
-                            <th scope="col">bruto werkuren</th>
-                            <th scope="col">werkuren decimaal</th>
-                            <th scope="col">85%</th>
-                            <th scope="col">15%</th>
-                            <th scope="col">uren per dag te werken</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr th:object="${workday}" th:class="${workday.vacationDayOrNot} ? 'orangetrue' : 'redfalse' ">
-                            <th scope="row" th:text="${#temporals.format(workday.date, 'EEEE dd MMMM yyyy')}"> zondag 1
-                                september 2019
-                            </th>
-                            <td th:text="${#temporals.format(workday.hourArrived, 'HH:mm')}">06:28</td>
-                            <td th:text="${#temporals.format(workday.hourLeft, 'HH:mm')}">15:22</td>
-                            <td th:text="${#temporals.format(workday.getTotalAmountOfHoursWorkedToday(), 'HH:mm')}">
-                                04:24
-                            </td>
-                            <td th:text="${#temporals.format(workday.getMinimumHourToWorkTo(), 'HH:mm')}">15:58</td>
-                            <td th:text="${#temporals.format(workday.getMaximumHourToWorkTo(), 'HH:mm')}">18:58</td>
-                            <td th:text="${workday.brutoWorkedHours}">56.4</td>
-                            <td th:text="${workday.getWorkedHoursDecimal()}">55.4</td>
-                            <td th:text="${workday.getEightyFiveProcentOfWorkedHoursDecimal()}">12</td>
-                            <td th:text="${workday.getFifteenProcentOfWorkedHoursDecimal()}">0000</td>
-                            <td th:text="${#temporals.format(workday.getHoursToWorkEachDay(), 'HH:mm')}">074:00</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <table class="table">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">dag</th>
-                            <th scope="col">Uur komen</th>
-                            <th scope="col">Uur gaan</th>
-                            <th scope="col">totaal aantal uren</th>
-                            <th scope="col">minimaal uur tot te werken</th>
-                            <th scope="col">maximaal uur tot te werken</th>
-                            <th scope="col">bruto werkuren</th>
-                            <th scope="col">werkuren decimaal</th>
-                            <th scope="col">85%</th>
-                            <th scope="col">15%</th>
-                            <th scope="col">uren per dag te werken</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-
-                        <tr th:if="${workdays.isEmpty()}">
-                            <td colspan="11">No workdays available</td>
-                        </tr>
-                        <tr th:each="workday : ${workdays}"
-                            th:class="${workday.vacationDayOrNot} ? 'orangetrue' : 'redfalse' ">
-                            <th scope="row" th:text="${#temporals.format(workday.date, 'EEEE dd MMMM yyyy')}"> zondag 1
-                                september 2019
-                            </th>
-                            <td th:text="${#temporals.format(workday.hourArrived, 'HH:mm')}">06:28</td>
-                            <td th:text="${#temporals.format(workday.hourLeft, 'HH:mm')}">15:22</td>
-                            <td th:text="${#temporals.format(workday.getTotalAmountOfHoursWorkedToday(), 'HH:mm')}">
-                                04:24
-                            </td>
-                            <td th:text="${#temporals.format(workday.getMinimumHourToWorkTo(), 'HH:mm')}">15:58</td>
-                            <td th:text="${#temporals.format(workday.getMaximumHourToWorkTo(), 'HH:mm')}">18:58</td>
-                            <td th:text="${workday.brutoWorkedHours}">56.4</td>
-                            <td th:text="${workday.getWorkedHoursDecimal()}">55.4</td>
-                            <td th:text="${workday.getEightyFiveProcentOfWorkedHoursDecimal()}">12</td>
-                            <td th:text="${workday.getFifteenProcentOfWorkedHoursDecimal()}">0000</td>
-                            <td th:text="${#temporals.format(workday.getHoursToWorkEachDay(), 'HH:mm')}">074:00</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-5">
-            <div class="card">
-                <div class="card-block">
-                    <h3 class="card-title">Our Visitors </h3>
-                    <h6 class="card-subtitle">Different Devices Used to Visit</h6>
-                    <div id="visitor" style="height:290px; width:100%;"></div>
-                </div>
-                <div>
-                    <hr class="m-t-0 m-b-0">
-                </div>
-                <div class="card-block text-center ">
-                    <ul class="list-inline m-b-0">
-                        <li>
-                            <h6 class="text-muted text-info"><i class="fa fa-circle font-10 m-r-10 "></i>Mobile</h6>
-                        </li>
-                        <li>
-                            <h6 class="text-muted  text-primary"><i class="fa fa-circle font-10 m-r-10"></i>Desktop</h6>
-                        </li>
-                        <li>
-                            <h6 class="text-muted  text-success"><i class="fa fa-circle font-10 m-r-10"></i>Tablet</h6>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Row -->
-
-
 
     <!-- Row -->
     <div class="row">
         <!-- Column -->
         <div class="col-lg-8 col-md-7">
             <div class="card">
-                <div class="card-block">
+                <div class="card-block card-body">
                     <div class="row">
                         <div class="col-12">
                             <div class="d-flex flex-wrap">
@@ -183,7 +64,7 @@
         </div>
         <div class="col-lg-4 col-md-5">
             <div class="card">
-                <div class="card-block">
+                <div class="card-block card-body">
                     <h3 class="card-title">Our Visitors </h3>
                     <h6 class="card-subtitle">Different Devices Used to Visit</h6>
                     <div id="visitor" style="height:290px; width:100%;"></div>
@@ -191,7 +72,7 @@
                 <div>
                     <hr class="m-t-0 m-b-0">
                 </div>
-                <div class="card-block text-center ">
+                <div class="card-block card-body text-center ">
                     <ul class="list-inline m-b-0">
                         <li>
                             <h6 class="text-muted text-info"><i class="fa fa-circle font-10 m-r-10 "></i>Mobile</h6>
@@ -216,7 +97,8 @@
             <div class="card">
                 <img class="card-img-top" src="/dashboard/assets/images/background/profile-bg.jpg"
                      alt="Card image cap">
-                <div class="card-block little-profile text-center">
+                <!-- fil -->
+                <div class="card-block card-body little-profile text-center">
                     <div class="pro-img"><img src="/dashboard/assets/images/users/4.jpg" alt="user"/></div>
                     <h3 class="m-b-0">Angela Dominic</h3>
                     <p>Web Designer &amp; Developer</p>
@@ -240,11 +122,11 @@
             </div>
             <!-- Column -->
             <div class="card">
-                <div class="card-block bg-info">
+                <div class="card-block card-body  bg-info">
                     <h4 class="text-white card-title">My Contacts</h4>
                     <h6 class="card-subtitle text-white m-b-0 op-5">Checkout my contacts here</h6>
                 </div>
-                <div class="card-block">
+                <div class="card-block card-body ">
                     <div class="message-box contact-box">
                         <h2 class="add-ct-btn">
                             <button type="button" class="btn btn-circle btn-lg btn-success waves-effect waves-dark">+
@@ -302,7 +184,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="home" role="tabpanel">
-                        <div class="card-block">
+                        <div class="card-block card-body ">
                             <div class="profiletimeline">
                                 <div class="sl-item">
                                     <div class="sl-left"><img src="/dashboard/assets/images/users/1.jpg" alt="user"
@@ -390,7 +272,7 @@
                     </div>
                     <!--second tab-->
                     <div class="tab-pane" id="profile" role="tabpanel">
-                        <div class="card-block">
+                        <div class="card-block card-body ">
                             <div class="row">
                                 <div class="col-md-3 col-xs-6 b-r"><strong>Full Name</strong>
                                     <br>
@@ -451,7 +333,7 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="settings" role="tabpanel">
-                        <div class="card-block">
+                        <div class="card-block card-body ">
                             <form class="form-horizontal form-material">
                                 <div class="form-group">
                                     <label class="col-md-12">Full Name</label>

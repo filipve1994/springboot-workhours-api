@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout">
+
+<head>
+</head>
+
+<body>
+
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid" layout:fragment="content"  data-thymeleaf-file-used="dashboard.html">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 col-8 align-self-center">
+            <h3 class="text-themecolor">Dashboard</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </div>
+
+        <div class="col-md-7 col-4 align-self-center">
+            <div class="d-flex m-t-10 justify-content-end">
+                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                    <div class="chart-text m-r-10">
+                        <h6 class="m-b-0"><small>THIS MONTH</small></h6>
+                        <h4 class="m-t-0 text-info">$58,356</h4></div>
+                    <div class="spark-chart">
+                        <div id="monthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
+                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                    <div class="chart-text m-r-10">
+                        <h6 class="m-b-0"><small>LAST MONTH</small></h6>
+                        <h4 class="m-t-0 text-primary">$48,356</h4></div>
+                    <div class="spark-chart">
+                        <div id="lastmonthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
+                <div class="">
+                    <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row pricing-plan">
+                        <div class="col-md-3 col-xs-12 col-sm-6 no-padding">
+                            <div class="pricing-box">
+                                <div class="pricing-body b-l">
+                                    <div class="pricing-header">
+                                        <h4 class="text-center">Silver</h4>
+                                        <h2 class="text-center"><span class="price-sign">$</span>24</h2>
+                                        <p class="uppercase">per month</p>
+                                    </div>
+                                    <div class="price-table-content">
+                                        <div class="price-row"><i class="icon-user"></i> 3 Members</div>
+                                        <div class="price-row"><i class="icon-screen-smartphone"></i> Single Device</div>
+                                        <div class="price-row"><i class="icon-drawar"></i> 50GB Storage</div>
+                                        <div class="price-row"><i class="icon-refresh"></i> Monthly Backups</div>
+                                        <div class="price-row">
+                                            <button class="btn btn-success waves-effect waves-light m-t-20">Sign up</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6 no-padding">
+                            <div class="pricing-box b-l">
+                                <div class="pricing-body">
+                                    <div class="pricing-header">
+                                        <h4 class="text-center">Gold</h4>
+                                        <h2 class="text-center"><span class="price-sign">$</span>34</h2>
+                                        <p class="uppercase">per month</p>
+                                    </div>
+                                    <div class="price-table-content">
+                                        <div class="price-row"><i class="icon-user"></i> 5 Members</div>
+                                        <div class="price-row"><i class="icon-screen-smartphone"></i> Single Device</div>
+                                        <div class="price-row"><i class="icon-drawar"></i> 80GB Storage</div>
+                                        <div class="price-row"><i class="icon-refresh"></i> Monthly Backups</div>
+                                        <div class="price-row">
+                                            <button class="btn btn-success waves-effect waves-light m-t-20">Sign up</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6 no-padding">
+                            <div class="pricing-box featured-plan">
+                                <div class="pricing-body">
+                                    <div class="pricing-header">
+                                        <h4 class="price-lable text-white bg-warning"> Popular</h4>
+                                        <h4 class="text-center">Platinum</h4>
+                                        <h2 class="text-center"><span class="price-sign">$</span>45</h2>
+                                        <p class="uppercase">per month</p>
+                                    </div>
+                                    <div class="price-table-content">
+                                        <div class="price-row"><i class="icon-user"></i> 10 Members</div>
+                                        <div class="price-row"><i class="icon-screen-smartphone"></i> Single Device</div>
+                                        <div class="price-row"><i class="icon-drawar"></i> 120GB Storage</div>
+                                        <div class="price-row"><i class="icon-refresh"></i> Monthly Backups</div>
+                                        <div class="price-row">
+                                            <button class="btn btn-lg btn-info waves-effect waves-light m-t-20">Sign up</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6 no-padding">
+                            <div class="pricing-box">
+                                <div class="pricing-body b-r">
+                                    <div class="pricing-header">
+                                        <h4 class="text-center">Dimond</h4>
+                                        <h2 class="text-center"><span class="price-sign">$</span>54</h2>
+                                        <p class="uppercase">per month</p>
+                                    </div>
+                                    <div class="price-table-content">
+                                        <div class="price-row"><i class="icon-user"></i> 15 Members</div>
+                                        <div class="price-row"><i class="icon-screen-smartphone"></i> Single Device</div>
+                                        <div class="price-row"><i class="icon-drawar"></i> 1TB Storage</div>
+                                        <div class="price-row"><i class="icon-refresh"></i> Monthly Backups</div>
+                                        <div class="price-row">
+                                            <button class="btn btn-success waves-effect waves-light m-t-20">Sign up</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+</div>
+</body>
+
+</html>

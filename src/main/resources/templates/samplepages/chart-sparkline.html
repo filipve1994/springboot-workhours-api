@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout">
+
+<head>
+</head>
+
+<body>
+
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid" layout:fragment="content"  data-thymeleaf-file-used="dashboard.html">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 col-8 align-self-center">
+            <h3 class="text-themecolor">Dashboard</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </div>
+
+        <div class="col-md-7 col-4 align-self-center">
+            <div class="d-flex m-t-10 justify-content-end">
+                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                    <div class="chart-text m-r-10">
+                        <h6 class="m-b-0"><small>THIS MONTH</small></h6>
+                        <h4 class="m-t-0 text-info">$58,356</h4></div>
+                    <div class="spark-chart">
+                        <div id="monthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
+                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                    <div class="chart-text m-r-10">
+                        <h6 class="m-b-0"><small>LAST MONTH</small></h6>
+                        <h4 class="m-t-0 text-primary">$48,356</h4></div>
+                    <div class="spark-chart">
+                        <div id="lastmonthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
+                <div class="">
+                    <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Total Visit</h4>
+                    <ul class="list-inline two-part">
+                        <li>
+                            <div id="sparklinedash"></div>
+                        </li>
+                        <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success">8659</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Total Page Views</h4>
+                    <ul class="list-inline two-part">
+                        <li>
+                            <div id="sparklinedash2"></div>
+                        </li>
+                        <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple">7469</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Unique Visitor</h4>
+                    <ul class="list-inline two-part">
+                        <li>
+                            <div id="sparklinedash3"></div>
+                        </li>
+                        <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info">6011</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Bounce Rate</h4>
+                    <ul class="list-inline two-part">
+                        <li>
+                            <div id="sparklinedash4"></div>
+                        </li>
+                        <li class="text-right"><i class="ti-arrow-down text-danger"></i> <span class="text-danger">18%</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Total Visit <small class="pull-right text-success"><i class="fa fa-sort-asc"></i> 18% High then last month</small></h4>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h6>Overall Growth</h6>
+                            <b>80.40%</b></div>
+                        <div class="stat-item">
+                            <h6>Montly</h6>
+                            <b>15.40%</b></div>
+                        <div class="stat-item">
+                            <h6>Day</h6>
+                            <b>5.50%</b></div>
+                    </div>
+                    <div id="sparkline8"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Site Traffic</h4>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h6>Overall Growth</h6>
+                            <b>80.40%</b></div>
+                        <div class="stat-item">
+                            <h6>Montly</h6>
+                            <b>15.40%</b></div>
+                        <div class="stat-item">
+                            <h6>Day</h6>
+                            <b>5.50%</b></div>
+                    </div>
+                    <div id="sparkline9"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Site Visit</h4>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h6>Overall Growth</h6>
+                            <b>80.40%</b></div>
+                        <div class="stat-item">
+                            <h6>Montly</h6>
+                            <b>15.40%</b></div>
+                        <div class="stat-item">
+                            <h6>Day</h6>
+                            <b>5.50%</b></div>
+                    </div>
+                    <div id="sparkline10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Bar Chart</h4>
+                    <div id="sparkline12" class="text-center"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Pie Chart</h4>
+                    <div id="sparkline11" class="text-center"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Composite Bar Chart</h4>
+                    <div id="sparkline13" class="text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card card-inverse card-primary">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Line Chart</h4>
+                    <div id="sparkline14"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Bar with different color Chart</h4>
+                    <div id="sparkline15" class="text-center"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body analytics-info">
+                    <h4 class="card-title">Line Chart</h4>
+                    <div id="sparkline16" class="text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row -->
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+</div>
+</body>
+
+</html>

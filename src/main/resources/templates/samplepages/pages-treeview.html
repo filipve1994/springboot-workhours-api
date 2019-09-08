@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout">
+
+<head>
+</head>
+
+<body>
+
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid" layout:fragment="content"  data-thymeleaf-file-used="dashboard.html">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 col-8 align-self-center">
+            <h3 class="text-themecolor">Treeview</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                <li class="breadcrumb-item active">Treeview</li>
+            </ol>
+        </div>
+
+        <div class="col-md-7 col-4 align-self-center">
+            <div class="d-flex m-t-10 justify-content-end">
+                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                    <div class="chart-text m-r-10">
+                        <h6 class="m-b-0"><small>THIS MONTH</small></h6>
+                        <h4 class="m-t-0 text-info">$58,356</h4></div>
+                    <div class="spark-chart">
+                        <div id="monthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
+                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                    <div class="chart-text m-r-10">
+                        <h6 class="m-b-0"><small>LAST MONTH</small></h6>
+                        <h4 class="m-t-0 text-primary">$48,356</h4></div>
+                    <div class="spark-chart">
+                        <div id="lastmonthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
+                <div class="">
+                    <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+
+
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            <h4 class="card-title">Default</h4>
+                            <div id="treeview1" class="treeview"><ul class="list-group"><li class="list-group-item node-treeview1" data-nodeid="0" style="color:undefined;background-color:undefined;"><span class="icon expand-icon ti-minus"></span><span class="icon node-icon fa fa-folder"></span>Parent 1</li><li class="list-group-item node-treeview1" data-nodeid="1" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon expand-icon ti-plus"></span><span class="icon node-icon fa fa-folder"></span>Child 1</li><li class="list-group-item node-treeview1" data-nodeid="4" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Child 2</li><li class="list-group-item node-treeview1" data-nodeid="5" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 2</li><li class="list-group-item node-treeview1" data-nodeid="6" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 3</li><li class="list-group-item node-treeview1 node-selected" data-nodeid="7" style="color:#FFFFFF;background-color:#03a9f3;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 4</li><li class="list-group-item node-treeview1" data-nodeid="8" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 5</li></ul></div>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <h4 class="card-title">Collapsed</h4>
+                            <div id="treeview2" class="treeview"><ul class="list-group"><li class="list-group-item node-treeview2" data-nodeid="0" style="color:undefined;background-color:undefined;"><span class="icon expand-icon ti-plus"></span><span class="icon node-icon fa fa-folder"></span>Parent 1</li><li class="list-group-item node-treeview2" data-nodeid="5" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 2</li><li class="list-group-item node-treeview2" data-nodeid="6" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 3</li><li class="list-group-item node-treeview2" data-nodeid="7" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 4</li><li class="list-group-item node-treeview2" data-nodeid="8" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 5</li></ul></div>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <h4 class="card-title">Tags as Badges</h4>
+                            <div id="treeview3" class="treeview"><ul class="list-group"><li class="list-group-item node-treeview3" data-nodeid="0" style="color:undefined;background-color:undefined;"><span class="icon expand-icon ti-minus"></span><span class="icon node-icon fa fa-folder"></span>Parent 1</li><li class="list-group-item node-treeview3" data-nodeid="1" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon expand-icon ti-minus"></span><span class="icon node-icon fa fa-folder"></span>Child 1</li><li class="list-group-item node-treeview3" data-nodeid="2" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="indent"></span><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Grandchild 1</li><li class="list-group-item node-treeview3" data-nodeid="3" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="indent"></span><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Grandchild 2</li><li class="list-group-item node-treeview3" data-nodeid="4" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Child 2</li><li class="list-group-item node-treeview3" data-nodeid="5" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 2</li><li class="list-group-item node-treeview3" data-nodeid="6" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 3</li><li class="list-group-item node-treeview3" data-nodeid="7" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 4</li><li class="list-group-item node-treeview3" data-nodeid="8" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 5</li></ul></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            <h4 class="card-title">Blue Theme</h4>
+                            <div id="treeview4" class="treeview"><ul class="list-group"><li class="list-group-item node-treeview4" data-nodeid="0" style="color:undefined;background-color:undefined;"><span class="icon expand-icon ti-minus"></span><span class="icon node-icon fa fa-folder"></span>Parent 1</li><li class="list-group-item node-treeview4" data-nodeid="1" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon expand-icon ti-plus"></span><span class="icon node-icon fa fa-folder"></span>Child 1</li><li class="list-group-item node-treeview4" data-nodeid="4" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Child 2</li><li class="list-group-item node-treeview4" data-nodeid="5" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 2</li><li class="list-group-item node-treeview4" data-nodeid="6" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 3</li><li class="list-group-item node-treeview4" data-nodeid="7" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 4</li><li class="list-group-item node-treeview4" data-nodeid="8" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 5</li></ul></div>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <h4 class="card-title">Custom Icons</h4>
+                            <div id="treeview5" class="treeview"><ul class="list-group"><li class="list-group-item node-treeview5" data-nodeid="0" style="color:undefined;background-color:undefined;"><span class="icon expand-icon ti-angle-down"></span><span class="icon node-icon fa fa-bookmark"></span>Parent 1</li><li class="list-group-item node-treeview5" data-nodeid="1" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon expand-icon ti-angle-right"></span><span class="icon node-icon fa fa-bookmark"></span>Child 1</li><li class="list-group-item node-treeview5" data-nodeid="4" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon glyphicon"></span><span class="icon node-icon fa fa-bookmark"></span>Child 2</li><li class="list-group-item node-treeview5" data-nodeid="5" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-bookmark"></span>Parent 2</li><li class="list-group-item node-treeview5" data-nodeid="6" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-bookmark"></span>Parent 3</li><li class="list-group-item node-treeview5" data-nodeid="7" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-bookmark"></span>Parent 4</li><li class="list-group-item node-treeview5" data-nodeid="8" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-bookmark"></span>Parent 5</li></ul></div>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <h4 class="card-title">Expanded</h4>
+                            <div id="treeview6" class="treeview"><ul class="list-group"><li class="list-group-item node-treeview6" data-nodeid="0" style="color:undefined;background-color:undefined;"><span class="icon expand-icon fa fa-check-circle-o"></span><span class="icon node-icon ti-user"></span>Parent 1<span class="badge">4</span></li><li class="list-group-item node-treeview6" data-nodeid="1" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon expand-icon fa fa-circle"></span><span class="icon node-icon ti-user"></span>Child 1<span class="badge">2</span></li><li class="list-group-item node-treeview6" data-nodeid="4" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon glyphicon"></span><span class="icon node-icon ti-user"></span>Child 2<span class="badge">0</span></li><li class="list-group-item node-treeview6" data-nodeid="5" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon ti-user"></span>Parent 2<span class="badge">0</span></li><li class="list-group-item node-treeview6" data-nodeid="6" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon ti-user"></span>Parent 3<span class="badge">0</span></li><li class="list-group-item node-treeview6" data-nodeid="7" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon ti-user"></span>Parent 4<span class="badge">0</span></li><li class="list-group-item node-treeview6" data-nodeid="8" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon ti-user"></span>Parent 5<span class="badge">0</span></li></ul></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Searchable Tree</h4>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h2>Input</h2>
+                            <!-- <form> -->
+                            <div class="form-group">
+                                <label for="input-search" class="sr-only">Search Tree:</label>
+                                <input type="input" class="form-control" id="input-search" placeholder="Type to search..." value="">
+                            </div>
+                            <div class="checkbox checkbox-info">
+                                <input type="checkbox" class="checkbox" id="chk-ignore-case" value="false">
+                                <label for="chk-ignore-case">Ignore Case</label>
+                            </div>
+                            <div class="checkbox checkbox-info">
+                                <input type="checkbox" class="checkbox" id="chk-exact-match" value="false">
+                                <label for="chk-exact-match">Exact Match</label>
+                            </div>
+                            <div class="checkbox checkbox-info">
+                                <input type="checkbox" class="checkbox" id="chk-reveal-results" value="false">
+                                <label for="chk-reveal-results">Reveal Results</label>
+                            </div>
+                            <button type="button" class="btn btn-success" id="btn-search">Search</button>
+                            <button type="button" class="btn btn-default" id="btn-clear-search">Clear</button>
+                            <!-- </form> -->
+                        </div>
+                        <div class="col-sm-4">
+                            <h2>Tree</h2>
+                            <div id="treeview-searchable" class="treeview"><ul class="list-group"><li class="list-group-item node-treeview-searchable" data-nodeid="0" style="color:undefined;background-color:undefined;"><span class="icon expand-icon ti-minus"></span><span class="icon node-icon fa fa-folder"></span>Parent 1</li><li class="list-group-item node-treeview-searchable" data-nodeid="1" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon expand-icon ti-plus"></span><span class="icon node-icon fa fa-folder"></span>Child 1</li><li class="list-group-item node-treeview-searchable" data-nodeid="4" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Child 2</li><li class="list-group-item node-treeview-searchable" data-nodeid="5" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 2</li><li class="list-group-item node-treeview-searchable" data-nodeid="6" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 3</li><li class="list-group-item node-treeview-searchable" data-nodeid="7" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 4</li><li class="list-group-item node-treeview-searchable" data-nodeid="8" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon fa fa-folder"></span>Parent 5</li></ul></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <h2>Results</h2>
+                            <div id="search-output"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- Row -->
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+</div>
+</body>
+
+</html>

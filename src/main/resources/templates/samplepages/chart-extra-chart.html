@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout">
+
+<head>
+</head>
+
+<body>
+
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid" layout:fragment="content"  data-thymeleaf-file-used="dashboard.html">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 col-8 align-self-center">
+            <h3 class="text-themecolor">Dashboard</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </div>
+
+        <div class="col-md-7 col-4 align-self-center">
+            <div class="d-flex m-t-10 justify-content-end">
+                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                    <div class="chart-text m-r-10">
+                        <h6 class="m-b-0"><small>THIS MONTH</small></h6>
+                        <h4 class="m-t-0 text-info">$58,356</h4></div>
+                    <div class="spark-chart">
+                        <div id="monthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
+                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                    <div class="chart-text m-r-10">
+                        <h6 class="m-b-0"><small>LAST MONTH</small></h6>
+                        <h4 class="m-t-0 text-primary">$48,356</h4></div>
+                    <div class="spark-chart">
+                        <div id="lastmonthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
+                    </div>
+                </div>
+                <div class="">
+                    <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+
+
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Easy Pie Chart</h4>
+                    <h6 class="card-subtitle">Add code in span <code> class="chart easy-pie-chart-1"</code> to create chart</h6>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-6 m-b-30">
+                            <div class="chart easy-pie-chart-1" data-percent="75"> <span class="percent">75</span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 m-b-30">
+                            <div class="chart easy-pie-chart-2" data-percent="75"> <span class="percent">75</span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 m-b-30">
+                            <div class="easy-pie-chart-3 chart pie-chart" data-percent="25"> <span>25.00 <br>
+                                            <small class="text-muted">/100mb</small></span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 m-b-30">
+                            <div class="chart easy-pie-chart-4" data-percent="75"> <span class="percent">75</span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 m-b-30">
+                            <div class="chart easy-pie-chart-5" data-percent="75"> <span class="percent">75</span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6">
+                            <div class="easy-pie-chart-6 chart pie-chart" data-percent="25"> <span>25.00 <br>
+                                          <small class="text-muted">/100mb</small></span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="row m-t-40">
+                        <div class="col-12">
+                            <br>
+                            <br>
+                            <h4 class="card-title">Easy Pie Avtar Chart</h4>
+                            <h6 class="card-subtitle">Just add in div<code> class="chart easy-pie-chart-1"</code></h6>
+                        </div>
+                        <div class="col-lg-2 col-md-6 m-b-30">
+                            <div class="chart easy-pie-chart-1" data-percent="75"> <span><img src="/dashboard/assets/images/users/1.jpg" alt="user" class="img-circle"></span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 m-b-30">
+                            <div class="chart easy-pie-chart-2" data-percent="75"> <span><img src="/dashboard/assets/images/users/2.jpg" alt="user" class="img-circle"></span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 m-b-30">
+                            <div class="easy-pie-chart-3 chart" data-percent="25"> <span><img src="/dashboard/assets/images/users/3.jpg" alt="user" class="img-circle"></span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 m-b-30">
+                            <div class="chart easy-pie-chart-4" data-percent="75"> <span><img src="/dashboard/assets/images/users/4.jpg" alt="user" class="img-circle"></span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 m-b-30">
+                            <div class="chart easy-pie-chart-5" data-percent="75"> <span><img src="/dashboard/assets/images/users/5.jpg" alt="user" class="img-circle"></span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6">
+                            <div class="easy-pie-chart-6 chart" data-percent="25"> <span><img src="/dashboard/assets/images/users/6.jpg" alt="user" class="img-circle"></span> <canvas height="250" width="250" style="height: 100px; width: 100px;"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="row m-t-40">
+                        <div class="col-12">
+                            <br>
+                            <br>
+                            <h4 class="card-title">Css Charts</h4>
+                            <h6 class="card-subtitle">Just add class <code>.css-bar</code> and data lable </h6>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="10%" class="css-bar css-bar-10 css-bar-lg css-bar-default"></div>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="20%" class="css-bar css-bar-20 css-bar-lg"></div>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="30%" class="css-bar css-bar-30 css-bar-lg css-bar-success"></div>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="40%" class="css-bar css-bar-40 css-bar-lg css-bar-warning"></div>
+                        </div>
+                    </div>
+                    <div class="row m-t-40">
+                        <div class="col-12">
+                            <br>
+                            <br>
+                            <h4 class="card-title">All Size</h4>
+                            <h6 class="card-subtitle"><code>.css-bar-lg</code>, <code>.css-bar</code>, <code>.css-bar-sm</code>, <code>.css-bar-xs</code></h6>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="10%" class="css-bar css-bar-10 css-bar-lg css-bar-default"></div>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="20%" class="css-bar css-bar-20 css-bar"></div>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="30%" class="css-bar css-bar-30 css-bar-sm css-bar-success"></div>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="40%" class="css-bar css-bar-40 css-bar-xs css-bar-warning"></div>
+                        </div>
+                    </div>
+                    <div class="row m-t-40">
+                        <div class="col-12">
+                            <br>
+                            <br>
+                            <h4 class="card-title">Chart With image</h4>
+                            <h6 class="card-subtitle">put image between div</h6>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="10%" class="css-bar css-bar-10 css-bar-lg css-bar-default"><img src="/dashboard/assets/images/users/1.jpg" alt="User"></div>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="20%" class="css-bar css-bar-20 css-bar-lg"><img src="/dashboard/assets/images/users/2.jpg" alt="User"></div>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="30%" class="css-bar css-bar-30 css-bar-lg css-bar-success"><img src="/dashboard/assets/images/users/3.jpg" alt="User"></div>
+                        </div>
+                        <div class="col-lg-3 m-b-30">
+                            <div data-label="40%" class="css-bar css-bar-40 css-bar-lg css-bar-warning"><img src="/dashboard/assets/images/users/4.jpg" alt="User"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- Row -->
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+</div>
+</body>
+
+</html>

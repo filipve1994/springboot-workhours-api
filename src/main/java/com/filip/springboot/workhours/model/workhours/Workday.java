@@ -48,27 +48,31 @@ public class Workday {
         if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
             logger.info("getDate() : " + getDate() + " is weekend day");
             return LocalTime.of(0, 0, 0);
-        } else {
-
-            if (getHourArrived().isBefore(getHourLeft())) {
-                Duration between = Duration.between(getHourArrived(), getHourLeft());
-                long seconds = between.getSeconds();
-
-                int p1 = (int) (seconds % 60);
-                int p2 = (int) (seconds / 60);
-                int p3 = p2 % 60;
-
-                p2 = p2 / 60;
-
-                return LocalTime.of(p2, p3, p1);
-            } else {
-                return LocalTime.of(0, 0, 0);
-            }
         }
+
+        logger.info("getTotalAmountOfHoursWorkedToday : getHourArrived() : " + getHourArrived() + " - getHourLeft() : " + getHourLeft());
+
+        if (getHourArrived().isBefore(getHourLeft())) {
+            Duration between = Duration.between(getHourArrived(), getHourLeft());
+            long seconds = between.getSeconds();
+
+            int p1 = (int) (seconds % 60);
+            int p2 = (int) (seconds / 60);
+            int p3 = p2 % 60;
+
+            p2 = p2 / 60;
+
+            return LocalTime.of(p2, p3, p1);
+        }
+
+
+        return LocalTime.of(0, 0, 0);
 
     }
 
     public void setTotalAmountOfHoursWorkedToday() {
+
+        this.totalAmountOfHoursWorkedToday = LocalTime.of(0, 0, 0);
 
         if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
 
@@ -76,23 +80,22 @@ public class Workday {
 
             this.totalAmountOfHoursWorkedToday = LocalTime.of(0, 0, 0);
 
-        } else {
-            if (getHourArrived().isBefore(getHourLeft())) {
-                Duration between = Duration.between(getHourArrived(), getHourLeft());
-                long seconds = between.getSeconds();
-
-                int p1 = (int) (seconds % 60);
-                int p2 = (int) (seconds / 60);
-                int p3 = p2 % 60;
-
-                p2 = p2 / 60;
-
-                this.totalAmountOfHoursWorkedToday = LocalTime.of(p2, p3, p1);
-
-            } else {
-                this.totalAmountOfHoursWorkedToday = LocalTime.of(0, 0, 0);
-            }
         }
+        if (getHourArrived().isBefore(getHourLeft())) {
+            Duration between = Duration.between(getHourArrived(), getHourLeft());
+            long seconds = between.getSeconds();
+
+            int p1 = (int) (seconds % 60);
+            int p2 = (int) (seconds / 60);
+            int p3 = p2 % 60;
+
+            p2 = p2 / 60;
+
+            this.totalAmountOfHoursWorkedToday = LocalTime.of(p2, p3, p1);
+
+        }
+
+
     }
 
     private LocalTime minimumHourToWorkTo;
