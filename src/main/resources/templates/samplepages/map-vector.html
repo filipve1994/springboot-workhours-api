@@ -5,6 +5,11 @@
 <head>
 </head>
 
+<th:block layout:fragment="cssfilip">
+    <link href="/dashboard/html/pluginsfilip/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" type="text/css">
+
+</th:block>
+
 <body>
 
 <!-- ============================================================== -->
@@ -16,10 +21,10 @@
     <!-- ============================================================== -->
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor">Dashboard</h3>
+            <h3 class="text-themecolor">Map vector</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="home">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item active">Map vector</li>
             </ol>
         </div>
 
@@ -58,18 +63,38 @@
 
     <!-- Row -->
     <div class="row">
-        <!-- Column -->
-
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    This is some text within a card block.
+                    <h4 class="card-title">World Map</h4>
+                    <div id="world-map-markers" style="height: 700px"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">India</h4>
+                    <div id="india" style="height: 450px"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Usa</h4>
+                    <div id="usa" style="height: 450px"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Australia Map</h4>
+                    <div id="australia" style="height: 450px"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Uk Map</h4>
+                    <div id="uk" style="height: 450px"></div>
                 </div>
             </div>
         </div>
-
-
-
     </div>
     <!-- Row -->
 
@@ -77,6 +102,17 @@
     <!-- End PAge Content -->
     <!-- ============================================================== -->
 </div>
+
+<th:block layout:fragment="scriptsfilip">
+    <script src="/dashboard/html/pluginsfilip/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="/dashboard/html/pluginsfilip/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/dashboard/html/pluginsfilip/vectormap/jquery-jvectormap-in-mill.js"></script>
+    <script src="/dashboard/html/pluginsfilip/vectormap/jquery-jvectormap-us-aea-en.js"></script>
+    <script src="/dashboard/html/pluginsfilip/vectormap/jquery-jvectormap-uk-mill-en.js"></script>
+    <script src="/dashboard/html/pluginsfilip/vectormap/jquery-jvectormap-au-mill.js"></script>
+    <script src="/dashboard/html/pluginsfilip/vectormap/jvectormap.custom.js"></script>
+</th:block>
+
 </body>
 
 </html>

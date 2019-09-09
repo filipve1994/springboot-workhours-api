@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head th:fragment="header" data-thymeleaf-file-used="fragments/header.html">
     <meta charset="utf-8">
@@ -11,41 +11,54 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <title>Dashboard</title>
 
-    <link href="/dashboard/html/pluginsfilip/bootstrap/bootstrap.min.css" rel="stylesheet">
+<!--    <link href="/dashboard/html/pluginsfilip/bootstrap/bootstrap.min.css" rel="stylesheet"  type="text/css">-->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css">
 
     <!-- Bootstrap Core CSS -->
-    <link href="/dashboard/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
-
+<!--    <link href="/dashboard/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
 
     <!-- chartist CSS -->
-    <link href="/dashboard/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
-    <link href="/dashboard/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
-    <link href="/dashboard/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css"
-          rel="stylesheet">
-    <!--This page css - Morris CSS -->
-    <link href="/dashboard/assets/plugins/c3-master/c3.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/webjars/chartist/dist/chartist.min.css}" type="text/css">
+<!--    <link href="/dashboard/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet" type="text/css">-->
 
-    <!--    <link href="/dashboard/html/cssfilip/style.css" rel="stylesheet">-->
+<!--    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" type="text/css">-->
+    <link href="/dashboard/assets/plugins/chartist-js/dist/chartist-init.css" type="text/css">
+<!--    <link href="/dashboard/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet" type="text/css">-->
+
+<!--    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" type="text/css">-->
+    <link href="/dashboard/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css"
+          rel="stylesheet" type="text/css">
+
+
+    <!--This page css - Morris CSS -->
+    <link href="/dashboard/assets/plugins/c3-master/c3.min.css" rel="stylesheet" type="text/css">
+
+    <!--    <link href="/dashboard/html/cssfilip/style.css" rel="stylesheet" type="text/css">-->
 
     <!-- Custom CSS -->
-    <link href="/dashboard/html/css/style.css" rel="stylesheet">
+    <link href="/dashboard/html/css/style.css" rel="stylesheet" type="text/css">
 
-
+    <link href="/dashboard/html/cssfilip/style-light.css" rel="stylesheet" type="text/css">
 
     <!-- You can change the theme colors from here -->
-    <link href="/dashboard/html/css/colors/blue.css" id="theme" rel="stylesheet">
+    <link href="/dashboard/html/css/colors/blue.css" id="theme" rel="stylesheet" type="text/css">
 
-    <link href="/dashboard/html/cssfilip/blue-dark.css" id="themefilip" rel="stylesheet">
+<!--    <link href="/dashboard/html/cssfilip/blue-dark.css" id="themefilip" rel="stylesheet" type="text/css">-->
 
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" type="text/css">
+<!--    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.10.1/css/all.css}" type="text/css">-->
+<!--    <link rel="stylesheet" href="/webjars/font-awesome/5.10.1/css/all.css"  type="text/css">-->
 
-    <link href="/dashboard/assets/plugins/icons/font-awesome/css/all.css" rel="stylesheet">
-    <link href="/dashboard/assets/plugins/icons/themify-icons/themify-icons.css" rel="stylesheet">
-    <link href="/dashboard/assets/plugins/icons/weather-icons/css/weather-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/webjars/themify-icons/css/themify-icons.css}" type="text/css">
+<!--    <link href="/dashboard/assets/plugins/icons/themify-icons/themify-icons.css" rel="stylesheet" type="text/css">-->
 
+    <link rel="stylesheet" th:href="@{/webjars/weather-icons/css/weather-icons.min.css}" type="text/css">
+<!--    <link href="/dashboard/assets/plugins/icons/weather-icons/css/weather-icons.min.css" rel="stylesheet" type="text/css">-->
+
+    <th:block layout:fragment="cssfilip" th:fragment="cssfilip" th:remove="tag"></th:block>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -55,19 +68,13 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="/dashboard/assets/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-<!--    <script src="/dashboard/assets/plugins/bootstrap/js/tether.min.js"></script>-->
 
     <!-- new -->
     <script src="/dashboard/html/pluginsfilip/bootstrap/popper.min.js"></script>
 
     <!-- end new -->
 
-<!--    <script src="/dashboard/assets/plugins/bootstrap/js/bootstrap.min.js"></script>-->
-
     <script src="/dashboard/html/pluginsfilip/bootstrap/bootstrap.min.js"></script>
-
-
 
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="/dashboard/html/js/jquery.slimscroll.js"></script>

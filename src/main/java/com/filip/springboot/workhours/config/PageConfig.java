@@ -1,6 +1,7 @@
 package com.filip.springboot.workhours.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -9,6 +10,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class PageConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("/webjars/**")
+                .addResourceLocations("/webjars/")
+                .resourceChain(false);
+    }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -35,6 +44,12 @@ public class PageConfig implements WebMvcConfigurer {
         registry.addViewController("/samples/icon-material").setViewName("samplepages/icon-material");
         registry.addViewController("/samples/map-vector").setViewName("samplepages/map-vector");
         registry.addViewController("/samples/map-google").setViewName("samplepages/map-google");
+
+        registry.addViewController("/samples/dashboard2").setViewName("samplepages/dashboard2");
+        registry.addViewController("/samples/dashboard3").setViewName("samplepages/dashboard3");
+        registry.addViewController("/samples/dashboard4").setViewName("samplepages/dashboard4");
+        registry.addViewController("/samples/dashboard5").setViewName("samplepages/dashboard5");
+        registry.addViewController("/samples/dashboard6").setViewName("samplepages/dashboard6");
 
         registry.addViewController("/samples/chart-morris").setViewName("samplepages/chart-morris");
         registry.addViewController("/samples/chart-chartist").setViewName("samplepages/chart-chartist");
