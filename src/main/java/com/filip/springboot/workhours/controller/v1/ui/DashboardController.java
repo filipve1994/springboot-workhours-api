@@ -244,6 +244,43 @@ public class DashboardController {
         }
     }
 
+    @GetMapping(value = "/works/workmonth/{month}")
+    public ModelAndView getWorkMonth2(@PathVariable("month") String month) {
+        logger.info("workmonth2 : month => " + month);
+
+        ModelAndView modelAndView = new ModelAndView("workmonth");
+
+        modelAndView.addObject("standardDate", new Date());
+        modelAndView.addObject("localDateTime", LocalDateTime.now());
+        modelAndView.addObject("localDate", LocalDate.now());
+        modelAndView.addObject("timestamp", Instant.now());
+
+        //-----------------------------------
+
+        Workday workday = createWorkday("1", LocalDate.of(2019, 9, 2), LocalTime.of(8, 28, 0), LocalTime.of(17, 22, 0), 8.4);
+        Workday workday2 = createWorkday("2", LocalDate.of(2019, 9, 3), LocalTime.of(7, 28, 0), LocalTime.of(16, 22, 0), 8);
+        List<Workday> workdays = Arrays.asList(workday, workday2);
+        List<Workday> workdays2 = workDayRepository.findAll();
+
+        WorkMonth workMonth = workMonthRepository.findByIdQuery("10");
+
+        modelAndView.addObject("workday", workday);
+        modelAndView.addObject("workdays", workdays);
+        modelAndView.addObject("workdays2", workdays2);
+        modelAndView.addObject("workMonth", workMonth);
+
+        WorkdayFormCommand workdayFormCommand = new WorkdayFormCommand();
+        workdayFormCommand.setWorkdayList(workdays2);
+
+        WorkdayFormCommand workdayFormCommand2 = new WorkdayFormCommand();
+        workdayFormCommand2.setWorkdayList(workMonth.getWorkdays());
+
+        modelAndView.addObject("form", workdayFormCommand);
+        modelAndView.addObject("form2", workdayFormCommand2);
+
+        return modelAndView;
+    }
+
     @GetMapping(value = "/workmonth")
     public ModelAndView getWorkMonth() {
         ModelAndView modelAndView = new ModelAndView("workmonth");
