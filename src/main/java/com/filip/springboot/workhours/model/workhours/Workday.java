@@ -46,7 +46,7 @@ public class Workday {
     public LocalTime getTotalAmountOfHoursWorkedToday() {
 
         if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
-            logger.info("getDate() : " + getDate() + " is weekend day");
+            //logger.info("getDate() : " + getDate() + " is weekend day");
             return LocalTime.of(0, 0, 0);
         }
 
@@ -76,7 +76,7 @@ public class Workday {
 
         if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
 
-            logger.info("getDate() : " + getDate() + " is weekend day");
+            //logger.info("getDate() : " + getDate() + " is weekend day");
 
             this.totalAmountOfHoursWorkedToday = LocalTime.of(0, 0, 0);
 
@@ -105,7 +105,7 @@ public class Workday {
 
         if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
 
-            logger.info("getDate() : " + getDate() + " is weekend day");
+            //logger.info("getDate() : " + getDate() + " is weekend day");
             return LocalTime.of(0, 0, 0);
 
         }
@@ -117,7 +117,7 @@ public class Workday {
     public void setMinimumHourToWorkTo() {
         if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
 
-            logger.info("getDate() : " + getDate() + " is weekend day");
+            //logger.info("getDate() : " + getDate() + " is weekend day");
 
             this.minimumHourToWorkTo = LocalTime.of(0, 0, 0);
 
@@ -137,7 +137,7 @@ public class Workday {
 
         if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
 
-            logger.info("getDate() : " + getDate() + " is weekend day");
+            //logger.info("getDate() : " + getDate() + " is weekend day");
 
             return LocalTime.of(0, 0, 0);
 
@@ -152,7 +152,7 @@ public class Workday {
 
         if (DateUtils.checkIfDayIsWeekendDay(getDate())) {
 
-            logger.info("getDate() : " + getDate() + " is weekend day");
+            //logger.info("getDate() : " + getDate() + " is weekend day");
 
             this.maximumHourToWorkTo = LocalTime.of(0, 0, 0);
 

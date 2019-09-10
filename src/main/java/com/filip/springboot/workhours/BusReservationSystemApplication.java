@@ -8,6 +8,7 @@ import com.filip.springboot.workhours.model.bus.TripSchedule;
 import com.filip.springboot.workhours.model.user.Role;
 import com.filip.springboot.workhours.model.user.User;
 import com.filip.springboot.workhours.model.workhours.WorkMonth;
+import com.filip.springboot.workhours.model.workhours.WorkYear;
 import com.filip.springboot.workhours.model.workhours.Workday;
 import com.filip.springboot.workhours.repository.bus.AgencyRepository;
 import com.filip.springboot.workhours.repository.bus.BusRepository;
@@ -18,6 +19,7 @@ import com.filip.springboot.workhours.repository.user.RoleRepository;
 import com.filip.springboot.workhours.repository.user.UserRepository;
 import com.filip.springboot.workhours.repository.workhours.WorkDayRepository;
 import com.filip.springboot.workhours.repository.workhours.WorkMonthRepository;
+import com.filip.springboot.workhours.repository.workhours.WorkYearRepository;
 import com.filip.springboot.workhours.util.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +56,8 @@ public class BusReservationSystemApplication {
                            BusRepository busRepository, TripRepository tripRepository,
                            TripScheduleRepository tripScheduleRepository,
                            WorkDayRepository workDayRepository,
-                           WorkMonthRepository workMonthRepository) {
+                           WorkMonthRepository workMonthRepository,
+                           WorkYearRepository workYearRepository) {
         return args -> {
             //Create Admin and Passenger Roles
             Role adminRole = roleRepository.findByRole("ADMIN");
@@ -77,11 +80,23 @@ public class BusReservationSystemApplication {
                 admin = new User()
                         .setEmail("admin.agencya@gmail.com")
                         .setPassword("$2a$10$7PtcjEnWb/ZkgyXyxY1/Iei2dGgGQUbqIIll/dt.qJ8l8nQBWMbYO") // "123456"
-                        .setFirstName("John")
+                        .setFirstName("Filip")
                         .setLastName("Doe")
                         .setMobileNumber("9425094250")
                         .setRoles(new HashSet<>(Arrays.asList(adminRole)));
                 userRepository.save(admin);
+            }
+
+            User admin2 = userRepository.findByEmail("admin.filipve@gmail.com");
+            if (admin2 == null) {
+                admin2 = new User()
+                        .setEmail("admin.filipve@gmail.com")
+                        .setPassword("$2a$10$7PtcjEnWb/ZkgyXyxY1/Iei2dGgGQUbqIIll/dt.qJ8l8nQBWMbYO") // "123456"
+                        .setFirstName("Filip")
+                        .setLastName("VE")
+                        .setMobileNumber("123456789")
+                        .setRoles(new HashSet<>(Arrays.asList(adminRole)));
+                userRepository.save(admin2);
             }
 
             //Create four stops
@@ -178,7 +193,11 @@ public class BusReservationSystemApplication {
 
             createSampleWorkMonths(workMonthRepository, workDayRepository);
 
-            createFullWorkMonthWorkWeekWorkDaySamples(workMonthRepository, workDayRepository);
+            createFullWorkMonthWorkDaySamples(workMonthRepository, workDayRepository);
+
+            createFullWorkYearWorkMonthWorkDaySamples(workYearRepository, workMonthRepository, workDayRepository);
+
+
         };
 
 
@@ -325,12 +344,7 @@ public class BusReservationSystemApplication {
         return workMonth;
     }
 
-    private Workday createWorkday(
-            String id,
-            LocalDate date,
-            LocalTime hourArrived,
-            LocalTime hourLeft,
-            double brutoWorkedHours) {
+    private Workday createWorkday(String id, LocalDate date, LocalTime hourArrived, LocalTime hourLeft, double brutoWorkedHours) {
         Workday workday = new Workday();
         workday.setId(id);
         workday.setDate(date);
@@ -361,60 +375,116 @@ public class BusReservationSystemApplication {
         return workday;
     }
 
-    private void createFullWorkMonthWorkWeekWorkDaySamples(WorkMonthRepository workMonthRepository, WorkDayRepository workDayRepository) {
+    private void createFullWorkYearWorkMonthWorkDaySamples(WorkYearRepository workYearRepository, WorkMonthRepository workMonthRepository, WorkDayRepository workDayRepository) {
+
+        logger.info("createFullWorkYearWorkMonthWorkDaySamples");
+
+        List<Integer> rangeYears = rangeYears("2019", "2021");
+
+        for (Integer year : rangeYears) {
+            logger.info("year : " + year);
+            WorkYear workYear = workYearRepository.findByYear(year);
+            if (workYear == null) {
+                logger.info("workyear is null");
+                workYear = new WorkYear();
+                //workYear.setId()
+                workYear.setYear(year);
+                // new list of months for each year
+                List<WorkMonth> workMonths = new ArrayList<>();
+
+                // months
+                for (int i = 1; i <= 12; i++) {
+                    List<Workday> workdays = createSampleStarterWorkdaysForEachMonth(i, year);
+                    logger.info("this month : " + i + " of the year " + year + " doesnt exist yet");
+                    WorkMonth workMonth = new WorkMonth();
+                    workMonth.setId(Integer.toString(i));
+                    workMonth.setMonth(i);
+                    workMonth.setWorkdays(workdays);
+
+                    workMonths.add(workMonth);
+                }
+
+                workYear.setWorkmonths(workMonths);
+
+                workYearRepository.save(workYear);
+            }
+        }
+
+
+    }
+
+    private void createFullWorkMonthWorkDaySamples(WorkMonthRepository workMonthRepository, WorkDayRepository workDayRepository) {
 
         logger.info("createFullWorkMonthWorkWeekWorkDaySamples");
 
-        int amountOfDaysOfMonthSeptember = DateUtils.getAmountOfDaysOfMonth(9, 2019);
         int amountOfDaysOfMonthOktober = DateUtils.getAmountOfDaysOfMonth(10, 2019);
         List<Workday> workdaysOktober = new ArrayList<>();
-        int amountOfDaysOfMonthNovember = DateUtils.getAmountOfDaysOfMonth(11, 2019);
-        int amountOfDaysOfMonthDecember = DateUtils.getAmountOfDaysOfMonth(12, 2019);
+        List<Integer> rangeYears = rangeYears("2019", "2021");
 
-
-        for (int i = 1; i <= amountOfDaysOfMonthSeptember; i++) {
-            LocalDate localDate = LocalDate.of(2019, 9, i);
-            logger.info(localDate.toString());
-        }
-
-        for (int i = 1; i <= amountOfDaysOfMonthOktober; i++) {
-            LocalDate localDate = LocalDate.of(2019, 10, i);
-            logger.info(localDate.toString());
-
-            Workday workday1 = new Workday();
-            System.out.println("workday" + i + " is null");
-            workday1 = createWorkday(
-                    Integer.toString(i),
-                    LocalDate.of(2019, 10, i),
-                    LocalTime.of(6, 0, 0),
-                    LocalTime.of(0, 0, 0),
-                    0);
-            //workDayRepository.save(workday1);
-
-            workdaysOktober.add(workday1);
-
-        }
-
-        WorkMonth workMonthOktober = new WorkMonth();
-        workMonthOktober.setId("10");
-        workMonthOktober.setWorkdays(workdaysOktober);
-        workMonthRepository.save(workMonthOktober);
+//        for (int i = 1; i <= amountOfDaysOfMonthOktober; i++) {
+//            LocalDate localDate = LocalDate.of(2019, 10, i);
+//            logger.info(localDate.toString());
+//
+//            workdaysOktober.add(createWorkday(Integer.toString(i), LocalDate.of(2019, 10, i), LocalTime.of(6, 0, 0),
+//                    LocalTime.of(0, 0, 0), 0));
+//
+//        }
+//
+//        WorkMonth workMonthOktober = new WorkMonth();
+//        workMonthOktober.setId("10");
+//        workMonthOktober.setWorkdays(workdaysOktober);
+        // workMonthOktober.setMonth(10);
+//        workMonthRepository.save(workMonthOktober);
 
         WorkMonth workMonthOktoberAll = workMonthRepository.findByIdQuery("10");
-        for(Workday ws : workMonthOktoberAll.getWorkdays()) {
-            logger.info(ws.toString());
+//        for (Workday ws : workMonthOktoberAll.getWorkdays()) {
+//            logger.info(ws.toString());
+//        }
+
+        for (Integer year : rangeYears) {
+            logger.info("year : " + year);
+            for (int i = 1; i <= 12; i++) {
+                List<Workday> workdays = createSampleStarterWorkdaysForEachMonth(i, year);
+                WorkMonth workMonthDB = workMonthRepository.findByIdQuery(Integer.toString(i));
+                if (workMonthDB == null) {
+                    logger.info("this month : " + i + " of the year " + year + " doesnt exist yet");
+                    WorkMonth workMonth = new WorkMonth();
+                    workMonth.setId(Integer.toString(i));
+                    workMonth.setWorkdays(workdays);
+                    workMonth.setMonth(i);
+                    workMonthRepository.save(workMonth);
+                }
+            }
         }
 
 
-        for (int i = 1; i <= amountOfDaysOfMonthNovember; i++) {
-            LocalDate localDate = LocalDate.of(2019, 11, i);
-            logger.info(localDate.toString());
+    }
+
+    private List<Workday> createSampleStarterWorkdaysForEachMonth(int month, int year) {
+
+        int amountOfDaysOfMonth = DateUtils.getAmountOfDaysOfMonth(month, year);
+        List<Workday> workdays = new ArrayList<>();
+
+        for (int i = 1; i <= amountOfDaysOfMonth; i++) {
+            workdays.add(createWorkday(
+                    Integer.toString(i), LocalDate.of(year, month, i),
+                    LocalTime.of(6, 0, 0),
+                    LocalTime.of(0, 0, 0),
+                    0));
         }
 
-        for (int i = 1; i <= amountOfDaysOfMonthDecember; i++) {
-            LocalDate localDate = LocalDate.of(2019, 12, i);
-            logger.info(localDate.toString());
+        return workdays;
+
+    }
+
+    public List<Integer> rangeYears(String startYear, String endYear) {
+        int cur = Integer.parseInt(startYear);
+        int stop = Integer.parseInt(endYear);
+        List<Integer> list = new ArrayList<>();
+        while (cur <= stop) {
+            list.add(cur++);
         }
+        return list;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(BusReservationSystemApplication.class);

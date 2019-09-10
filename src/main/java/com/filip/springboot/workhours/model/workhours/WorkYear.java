@@ -3,27 +3,27 @@ package com.filip.springboot.workhours.model.workhours;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-import java.util.Set;
 
+@ToString
 @Getter
 @Setter
 @NoArgsConstructor
 @Accessors(chain = true)
-@Document(collection = "workmonth")
-public class WorkMonth {
+@Document(collection = "workyear")
+public class WorkYear {
 
     @Id
     private String id;
 
-    private Integer month;
+    private int year;
 
     //@DBRef(lazy = true)
-    private List<Workday> workdays;
+    private List<WorkMonth> workmonths;
 
 }

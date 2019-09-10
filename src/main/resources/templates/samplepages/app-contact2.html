@@ -10,47 +10,11 @@
 <!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->
-<div class="container-fluid" layout:fragment="content"  data-thymeleaf-file-used="dashboard.html">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <div class="row page-titles">
-        <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor">Dashboard</h3>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="home">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-        </div>
+<div class="container-fluid" layout:fragment="content" data-thymeleaf-file-used="app-contact2.html">
 
-        <div class="col-md-7 col-4 align-self-center">
-            <div class="d-flex m-t-10 justify-content-end">
-                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
-                    <div class="chart-text m-r-10">
-                        <h6 class="m-b-0"><small>THIS MONTH</small></h6>
-                        <h4 class="m-t-0 text-info">$58,356</h4></div>
-                    <div class="spark-chart">
-                        <div id="monthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
-                    </div>
-                </div>
-                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
-                    <div class="chart-text m-r-10">
-                        <h6 class="m-b-0"><small>LAST MONTH</small></h6>
-                        <h4 class="m-t-0 text-primary">$48,356</h4></div>
-                    <div class="spark-chart">
-                        <div id="lastmonthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
-                    </div>
-                </div>
-                <div class="">
-                    <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
-                </div>
-            </div>
-        </div>
+    <!--    <div th:replace="fragments/breadcrumbs :: breadcrumbs(${heading}, ${subheading})"></div>-->
+    <div th:replace="fragments/breadcrumbs :: breadcrumbs(#{pages.app.contact2}, #{pages.home})"></div>
 
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
@@ -63,7 +27,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/1.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/1.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -83,7 +48,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/2.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/2.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -103,7 +69,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/3.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/3.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -123,7 +90,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/4.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/4.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -143,7 +111,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/5.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -163,7 +132,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/6.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/6.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -183,7 +153,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/7.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/7.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -203,7 +174,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/8.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/8.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -223,7 +195,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/1.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/1.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -243,7 +216,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/2.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/2.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -263,7 +237,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/3.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/3.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>
@@ -283,7 +258,8 @@
             <div class="card card-body">
                 <div class="row">
                     <div class="col-md-4 col-lg-3 text-center">
-                        <a href="app-contact-detail.html"><img src="../assets/images/users/4.jpg" alt="user" class="img-circle img-responsive"></a>
+                        <a href="app-contact-detail.html"><img src="/dashboard/assets/images/users/4.jpg" alt="user"
+                                                               class="img-circle img-responsive"></a>
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <h3 class="box-title m-b-0">Johnathan Doe</h3> <small>Web Designer</small>

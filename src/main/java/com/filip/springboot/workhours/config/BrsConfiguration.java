@@ -1,5 +1,6 @@
 package com.filip.springboot.workhours.config;
 
+import com.filip.springboot.workhours.util.AuthenticationUtils;
 import com.filip.springboot.workhours.util.DateUtils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.NamingConventions;
@@ -34,6 +35,11 @@ public class BrsConfiguration {
     @Bean(name = "dateutils")
     public DateUtils dateUtils(){
         return new DateUtils();
+    }
+
+    @Bean(name = "authenticationutils")
+    public AuthenticationUtils authenticationUtils(){
+        return new AuthenticationUtils();
     }
 
     @Bean

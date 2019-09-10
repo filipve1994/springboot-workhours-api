@@ -48,8 +48,8 @@ public class DateUtils {
     }
 
     public static boolean checkIfDayIsWeekendDay(LocalDate date) {
-        System.out.println("checkIfDayIsWeekendDay in DateUtils is being used");
-        System.out.println(date.toString());
+//        System.out.println("checkIfDayIsWeekendDay in DateUtils is being used");
+//        System.out.println(date.toString());
 
         DayOfWeek day = DayOfWeek.of(date.get(ChronoField.DAY_OF_WEEK));
         return day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY;
