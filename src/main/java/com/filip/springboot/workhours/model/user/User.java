@@ -35,6 +35,8 @@ public class User {
 
     private String mobileNumber;
 
+    private boolean enabled;
+
     @DBRef
     private Set<Role> roles;
 

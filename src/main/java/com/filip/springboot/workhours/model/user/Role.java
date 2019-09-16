@@ -18,6 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Accessors(chain = true)
 @Document(collection = "role")
 public class Role {
+
     @Id
     private String id;
 

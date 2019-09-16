@@ -21,6 +21,7 @@ public class UserMapper {
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())
                 .setMobileNumber(user.getMobileNumber())
+                .setEnabled(true)
                 .setRoles(new HashSet<RoleDto>(user
                         .getRoles()
                         .stream()

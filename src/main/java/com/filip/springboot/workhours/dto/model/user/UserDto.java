@@ -27,6 +27,7 @@ public class UserDto {
     private String lastName;
     private String mobileNumber;
     private boolean isAdmin;
+    private boolean enabled;
     private Set<RoleDto> roles;
 
     public String getFullName() {

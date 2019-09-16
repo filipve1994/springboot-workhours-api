@@ -23,11 +23,9 @@ import static com.filip.springboot.workhours.exception.EntityType.USER;
 import static com.filip.springboot.workhours.exception.ExceptionType.DUPLICATE_ENTITY;
 import static com.filip.springboot.workhours.exception.ExceptionType.ENTITY_NOT_FOUND;
 
-/**
- * Created by Arpit Khandelwal.
- */
 @Component
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -59,6 +57,7 @@ public class UserServiceImpl implements UserService {
                     .setRoles(new HashSet<>(Arrays.asList(userRole)))
                     .setFirstName(userDto.getFirstName())
                     .setLastName(userDto.getLastName())
+                    .setEnabled(true)
                     .setMobileNumber(userDto.getMobileNumber());
             return UserMapper.toUserDto(userRepository.save(user));
         }
