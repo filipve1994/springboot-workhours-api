@@ -2,6 +2,9 @@ package com.filip.springboot.workhours.security;
 
 import com.filip.springboot.workhours.dto.model.user.RoleDto;
 import com.filip.springboot.workhours.dto.model.user.UserDto;
+import com.filip.springboot.workhours.model.user.Role;
+import com.filip.springboot.workhours.model.user.User;
+import com.filip.springboot.workhours.repository.user.UserRepository;
 import com.filip.springboot.workhours.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,27 +19,30 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Arpit Khandelwal.
- */
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+//    @Autowired
+//    private UserService userService;
+
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserDto userDto = userService.findUserByEmail(email);
-        if (userDto != null) {
-            List<GrantedAuthority> authorities = getUserAuthority(userDto.getRoles());
-            return buildUserForAuthentication(userDto, authorities);
+        //UserDto userDto = userService.findUserByEmail(email);
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
+            return buildUserForAuthentication(user, authorities);
         } else {
             throw new UsernameNotFoundException("user with email " + email + " does not exist.");
         }
     }
 
-    private List<GrantedAuthority> getUserAuthority(Set<RoleDto> userRoles) {
+
+    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();
         userRoles.forEach((role) -> {
             roles.add(new SimpleGrantedAuthority(role.getRole()));
@@ -44,7 +50,19 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new ArrayList<GrantedAuthority>(roles);
     }
 
-    private UserDetails buildUserForAuthentication(UserDto user, List<GrantedAuthority> authorities) {
+    private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
+//
+//    private List<GrantedAuthority> getUserAuthority(Set<RoleDto> userRoles) {
+//        Set<GrantedAuthority> roles = new HashSet<>();
+//        userRoles.forEach((role) -> {
+//            roles.add(new SimpleGrantedAuthority(role.getRole()));
+//        });
+//        return new ArrayList<GrantedAuthority>(roles);
+//    }
+//
+//    private UserDetails buildUserForAuthentication(UserDto user, List<GrantedAuthority> authorities) {
+//        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+//    }
 }

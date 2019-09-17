@@ -16,9 +16,7 @@ import java.time.YearMonth;
 import java.time.temporal.ChronoField;
 import java.util.Date;
 
-/**
- * Created by Arpit Khandelwal.
- */
+
 @Component
 public class AuthenticationUtils {
 
@@ -27,8 +25,7 @@ public class AuthenticationUtils {
 
     public UserDto getUserDto(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDto userDto = userService.findUserByEmail(auth.getName());
-        return userDto;
+        return userService.findUserByEmail(auth.getName());
     }
 
 }

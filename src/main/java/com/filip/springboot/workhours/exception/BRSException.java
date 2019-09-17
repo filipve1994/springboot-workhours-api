@@ -1,7 +1,5 @@
 package com.filip.springboot.workhours.exception;
 
-import com.filip.springboot.workhours.config.PropertiesConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.MessageFormat;
@@ -14,13 +12,6 @@ import java.util.Optional;
  */
 @Component
 public class BRSException {
-
-    private static PropertiesConfig propertiesConfig;
-
-    @Autowired
-    public BRSException(PropertiesConfig propertiesConfig) {
-        BRSException.propertiesConfig = propertiesConfig;
-    }
 
     /**
      * Returns new RuntimeException based on template and args
@@ -105,10 +96,6 @@ public class BRSException {
     }
 
     private static String format(String template, String... args) {
-        Optional<String> templateContent = Optional.ofNullable(propertiesConfig.getConfigValue(template));
-        if (templateContent.isPresent()) {
-            return MessageFormat.format(templateContent.get(), args);
-        }
         return String.format(template, args);
     }
 

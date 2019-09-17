@@ -10,9 +10,6 @@ import lombok.experimental.Accessors;
 
 import java.util.Set;
 
-/**
- * Created by Arpit Khandelwal.
- */
 @Getter
 @Setter
 @Accessors(chain = true)

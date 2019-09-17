@@ -1,5 +1,6 @@
 package com.filip.springboot.workhours.service;
 
+import com.filip.springboot.workhours.controller.request.UserSignupRequest;
 import com.filip.springboot.workhours.dto.model.user.UserDto;
 
 /**
@@ -13,6 +14,14 @@ public interface UserService {
      * @return
      */
     UserDto signup(UserDto userDto);
+
+    /**
+     * Register a new user in the database
+     *
+     * @param userSignupRequest
+     * @return
+     */
+    UserDto registerUser(UserSignupRequest userSignupRequest, boolean isAdmin);
 
     /**
      * Search an existing user

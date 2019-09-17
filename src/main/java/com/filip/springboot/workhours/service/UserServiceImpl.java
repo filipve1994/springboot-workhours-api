@@ -1,5 +1,6 @@
 package com.filip.springboot.workhours.service;
 
+import com.filip.springboot.workhours.controller.request.UserSignupRequest;
 import com.filip.springboot.workhours.dto.mapper.UserMapper;
 import com.filip.springboot.workhours.dto.model.user.UserDto;
 import com.filip.springboot.workhours.exception.BRSException;
@@ -11,8 +12,8 @@ import com.filip.springboot.workhours.model.user.UserRoles;
 import com.filip.springboot.workhours.repository.user.RoleRepository;
 import com.filip.springboot.workhours.repository.user.UserRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -26,20 +27,23 @@ import static com.filip.springboot.workhours.exception.ExceptionType.ENTITY_NOT_
 @Component
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private BusReservationService busReservationService;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    public UserServiceImpl(PasswordEncoder bCryptPasswordEncoder,
+                           RoleRepository roleRepository,
+                           UserRepository userRepository,
+                           ModelMapper modelMapper) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public UserDto signup(UserDto userDto) {
@@ -62,6 +66,20 @@ public class UserServiceImpl implements UserService {
             return UserMapper.toUserDto(userRepository.save(user));
         }
         throw exception(USER, DUPLICATE_ENTITY, userDto.getEmail());
+    }
+
+    @Override
+    public UserDto registerUser(UserSignupRequest userSignupRequest, boolean isAdmin) {
+        UserDto userDto = new UserDto()
+                .setEmail(userSignupRequest.getEmail())
+                .setPassword(userSignupRequest.getPassword())
+                .setFirstName(userSignupRequest.getFirstName())
+                .setLastName(userSignupRequest.getLastName())
+                .setMobileNumber(userSignupRequest.getMobileNumber())
+                .setEnabled(true)
+                .setAdmin(isAdmin);
+
+        return signup(userDto);
     }
 
     /**
@@ -118,12 +136,12 @@ public class UserServiceImpl implements UserService {
     /**
      * Returns a new RuntimeException
      *
-     * @param entityType
+     * @param type
      * @param exceptionType
      * @param args
      * @return
      */
-    private RuntimeException exception(EntityType entityType, ExceptionType exceptionType, String... args) {
-        return BRSException.throwException(entityType, exceptionType, args);
+    private RuntimeException exception(EntityType type, ExceptionType exceptionType, String... args) {
+        return BRSException.throwException(type, exceptionType, args);
     }
 }

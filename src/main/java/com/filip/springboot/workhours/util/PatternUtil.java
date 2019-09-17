@@ -23,11 +23,7 @@ public class PatternUtil {
     public static boolean isURL(String urlString) {
         String regex = "^([hH][tT]{2}[pP]:/*|[hH][tT]{2}[pP][sS]:/*|[fF][tT][pP]:/*)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\/])+(\\?{0,1}(([A-Za-z0-9-~]+\\={0,1})([A-Za-z0-9-~]*)\\&{0,1})*)$";
         Pattern pattern = Pattern.compile(regex);
-        if (pattern.matcher(urlString).matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return pattern.matcher(urlString).matches();
     }
 
 }

@@ -9,11 +9,10 @@ import java.time.Month;
 import java.time.YearMonth;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
-/**
- * Created by Arpit Khandelwal.
- */
 @Component
 public class DateUtils {
 
@@ -137,5 +136,11 @@ public class DateUtils {
 
         return 0;
     }
+
+    public static List<String> getListOfMonths () {
+        return Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+    }
+
+
 
 }

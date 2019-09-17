@@ -1,20 +1,10 @@
 package com.filip.springboot.workhours;
 
-import com.filip.springboot.workhours.model.bus.Agency;
-import com.filip.springboot.workhours.model.bus.Bus;
-import com.filip.springboot.workhours.model.bus.Stop;
-import com.filip.springboot.workhours.model.bus.Trip;
-import com.filip.springboot.workhours.model.bus.TripSchedule;
 import com.filip.springboot.workhours.model.user.Role;
 import com.filip.springboot.workhours.model.user.User;
 import com.filip.springboot.workhours.model.workhours.WorkMonth;
 import com.filip.springboot.workhours.model.workhours.WorkYear;
 import com.filip.springboot.workhours.model.workhours.Workday;
-import com.filip.springboot.workhours.repository.bus.AgencyRepository;
-import com.filip.springboot.workhours.repository.bus.BusRepository;
-import com.filip.springboot.workhours.repository.bus.StopRepository;
-import com.filip.springboot.workhours.repository.bus.TripRepository;
-import com.filip.springboot.workhours.repository.bus.TripScheduleRepository;
 import com.filip.springboot.workhours.repository.user.RoleRepository;
 import com.filip.springboot.workhours.repository.user.UserRepository;
 import com.filip.springboot.workhours.repository.workhours.WorkDayRepository;
@@ -35,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.TimeZone;
 
 @SpringBootApplication
@@ -52,9 +41,6 @@ public class BusReservationSystemApplication {
 
     @Bean
     CommandLineRunner init(RoleRepository roleRepository, UserRepository userRepository,
-                           StopRepository stopRepository, AgencyRepository agencyRepository,
-                           BusRepository busRepository, TripRepository tripRepository,
-                           TripScheduleRepository tripScheduleRepository,
                            WorkDayRepository workDayRepository,
                            WorkMonthRepository workMonthRepository,
                            WorkYearRepository workYearRepository) {
@@ -67,10 +53,10 @@ public class BusReservationSystemApplication {
                 roleRepository.save(adminRole);
             }
 
-            Role userRole = roleRepository.findByRole("PASSENGER");
+            Role userRole = roleRepository.findByRole("USER");
             if (userRole == null) {
                 userRole = new Role();
-                userRole.setRole("PASSENGER");
+                userRole.setRole("USER");
                 roleRepository.save(userRole);
             }
 
@@ -97,95 +83,6 @@ public class BusReservationSystemApplication {
                         .setMobileNumber("123456789")
                         .setRoles(new HashSet<>(Arrays.asList(adminRole)));
                 userRepository.save(admin2);
-            }
-
-            //Create four stops
-            Stop stopA = stopRepository.findByCode("STPA");
-            if (stopA == null) {
-                stopA = new Stop()
-                        .setName("Stop A")
-                        .setDetail("Near hills")
-                        .setCode("STPA");
-                stopRepository.save(stopA);
-            }
-
-            Stop stopB = stopRepository.findByCode("STPB");
-            if (stopB == null) {
-                stopB = new Stop()
-                        .setName("Stop B")
-                        .setDetail("Near river")
-                        .setCode("STPB");
-                stopRepository.save(stopB);
-            }
-
-            Stop stopC = stopRepository.findByCode("STPC");
-            if (stopC == null) {
-                stopC = new Stop()
-                        .setName("Stop C")
-                        .setDetail("Near desert")
-                        .setCode("STPC");
-                stopRepository.save(stopC);
-            }
-
-            Stop stopD = stopRepository.findByCode("STPD");
-            if (stopD == null) {
-                stopD = new Stop()
-                        .setName("Stop D")
-                        .setDetail("Near lake")
-                        .setCode("STPD");
-                stopRepository.save(stopD);
-            }
-
-            //Create an Agency
-            Agency agencyA = agencyRepository.findByCode("AGENCYA");
-            if (agencyA == null) {
-                agencyA = new Agency()
-                        .setName("Green Mile Agency")
-                        .setCode("AGENCYA")
-                        .setDetails("Reaching desitnations with ease")
-                        .setOwner(admin);
-                agencyRepository.save(agencyA);
-            }
-
-            //Create a bus
-            Bus busA = busRepository.findByCode("AGENCYA-1");
-            if (busA == null) {
-                busA = new Bus()
-                        .setCode("AGENCYA-1")
-                        .setAgency(agencyA)
-                        .setCapacity(60);
-                busRepository.save(busA);
-            }
-
-            //Add busA to set of buses owned by Agency 'AGENCYA'
-            if (agencyA.getBuses() == null) {
-                Set<Bus> buses = new HashSet<>();
-                agencyA.setBuses(buses);
-                agencyA.getBuses().add(busA);
-                agencyRepository.save(agencyA);
-            }
-
-            //Create a Trip
-            Trip trip = tripRepository.findBySourceStopAndDestStopAndBus(stopA, stopB, busA);
-            if (trip == null) {
-                trip = new Trip()
-                        .setSourceStop(stopA)
-                        .setDestStop(stopB)
-                        .setBus(busA)
-                        .setAgency(agencyA)
-                        .setFare(100)
-                        .setJourneyTime(60);
-                tripRepository.save(trip);
-            }
-
-            //Create a trip schedule
-            TripSchedule tripSchedule = tripScheduleRepository.findByTripDetailAndTripDate(trip, DateUtils.todayStr());
-            if (tripSchedule == null) {
-                tripSchedule = new TripSchedule()
-                        .setTripDetail(trip)
-                        .setTripDate(DateUtils.todayStr())
-                        .setAvailableSeats(trip.getBus().getCapacity());
-                tripScheduleRepository.save(tripSchedule);
             }
 
             createSampleWorkdays(workDayRepository);

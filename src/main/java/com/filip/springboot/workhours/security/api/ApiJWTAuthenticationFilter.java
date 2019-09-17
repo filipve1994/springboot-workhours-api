@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Arpit Khandelwal.
+ * Via een postmethod /api/auth kan je inloggen en als response header krijg je de authorization jwt header
  */
 public class ApiJWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
@@ -36,6 +36,7 @@ public class ApiJWTAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
+        logger.info("ApiJWTAuthenticationFilter attemptAuthentication function");
         try {
             User user = new ObjectMapper().readValue(req.getInputStream(), User.class);
             return authenticationManager.authenticate(
@@ -45,6 +46,9 @@ public class ApiJWTAuthenticationFilter extends UsernamePasswordAuthenticationFi
                             new ArrayList<>())
             );
         } catch (IOException e) {
+            logger.info("ApiJWTAuthenticationFilter attemptAuthentication function - error wrong email or password");
+            logger.error("ApiJWTAuthenticationFilter attemptAuthentication function - error wrong email or password");
+
             throw new RuntimeException(e);
         }
     }
@@ -54,6 +58,7 @@ public class ApiJWTAuthenticationFilter extends UsernamePasswordAuthenticationFi
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
+        logger.info("ApiJWTAuthenticationFilter successfulAuthentication function");
         if (auth.getPrincipal() != null) {
             org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) auth.getPrincipal();
             String login = user.getUsername();

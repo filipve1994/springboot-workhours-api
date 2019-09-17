@@ -1,8 +1,5 @@
 package com.filip.springboot.workhours.util;
 
-/**
- * Created by Arpit Khandelwal.
- */
 public class RandomStringUtil {
     // function to generate a random string of length n
     public static String getAlphaNumericString(int n, String inputString) {

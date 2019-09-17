@@ -17,9 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by Arpit Khandelwal.
- */
 public class ApiJWTAuthorizationFilter extends BasicAuthenticationFilter {
     public ApiJWTAuthorizationFilter(AuthenticationManager authManager) {
         super(authManager);
@@ -29,6 +26,7 @@ public class ApiJWTAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
                                     FilterChain chain) throws IOException, ServletException {
+        logger.info("ApiJWTAuthorizationFilter doFilterInternal function");
         String header = req.getHeader(SecurityConstants.HEADER_STRING);
         if (header == null || !header.startsWith(SecurityConstants.TOKEN_PREFIX)) {
             chain.doFilter(req, res);
@@ -40,6 +38,8 @@ public class ApiJWTAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+        logger.info("ApiJWTAuthorizationFilter getAuthentication function");
+
         String token = request.getHeader(SecurityConstants.HEADER_STRING);
         if (token != null) {
             Claims claims = Jwts.parser()
