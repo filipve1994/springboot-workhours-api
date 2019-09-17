@@ -1,6 +1,8 @@
 package com.filip.springboot.workhours.util;
 
 import com.filip.springboot.workhours.dto.model.user.UserDto;
+import com.filip.springboot.workhours.model.user.User;
+import com.filip.springboot.workhours.repository.user.UserRepository;
 import com.filip.springboot.workhours.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,9 +25,17 @@ public class AuthenticationUtils {
     @Autowired
     private UserService userService;
 
-    public UserDto getUserDto(){
+    @Autowired
+    private UserRepository userRepository;
+
+    public UserDto getUserDto() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userService.findUserByEmail(auth.getName());
+    }
+
+    public User getUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userRepository.findByEmail(auth.getName());
     }
 
 }

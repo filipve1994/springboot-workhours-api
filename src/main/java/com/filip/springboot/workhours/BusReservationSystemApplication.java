@@ -73,15 +73,27 @@ public class BusReservationSystemApplication {
                 userRepository.save(admin);
             }
 
-            User admin2 = userRepository.findByEmail("admin.filipve@gmail.com");
-            if (admin2 == null) {
-                admin2 = new User()
+            User user = userRepository.findByEmail("admin.filipve@gmail.com");
+            if (user == null) {
+                user = new User()
                         .setEmail("admin.filipve@gmail.com")
                         .setPassword("$2a$10$7PtcjEnWb/ZkgyXyxY1/Iei2dGgGQUbqIIll/dt.qJ8l8nQBWMbYO") // "123456"
                         .setFirstName("Filip")
                         .setLastName("VE")
                         .setMobileNumber("123456789")
                         .setRoles(new HashSet<>(Arrays.asList(adminRole)));
+                userRepository.save(user);
+            }
+
+            User admin2 = userRepository.findByEmail("filipve@outlook.com");
+            if (admin2 == null) {
+                admin2 = new User()
+                        .setEmail("filipve@outlook.com")
+                        .setPassword("$2a$10$7PtcjEnWb/ZkgyXyxY1/Iei2dGgGQUbqIIll/dt.qJ8l8nQBWMbYO") // "123456"
+                        .setFirstName("Filip")
+                        .setLastName("VE")
+                        .setMobileNumber("123456789")
+                        .setRoles(new HashSet<>(Arrays.asList(userRole)));
                 userRepository.save(admin2);
             }
 
@@ -93,6 +105,10 @@ public class BusReservationSystemApplication {
             createFullWorkMonthWorkDaySamples(workMonthRepository, workDayRepository);
 
             createFullWorkYearWorkMonthWorkDaySamples(workYearRepository, workMonthRepository, workDayRepository);
+
+            createFullWorkYearWorkMonthWorkDaySamplesForUser(admin, userRepository, workYearRepository, workMonthRepository, workDayRepository);
+            createFullWorkYearWorkMonthWorkDaySamplesForUser(user, userRepository, workYearRepository, workMonthRepository, workDayRepository);
+            createFullWorkYearWorkMonthWorkDaySamplesForUser(admin2, userRepository, workYearRepository, workMonthRepository, workDayRepository);
 
 
         };
@@ -385,5 +401,49 @@ public class BusReservationSystemApplication {
     }
 
     private static final Logger logger = LoggerFactory.getLogger(BusReservationSystemApplication.class);
+
+    private void createFullWorkYearWorkMonthWorkDaySamplesForUser(User user, UserRepository userRepository, WorkYearRepository workYearRepository, WorkMonthRepository workMonthRepository, WorkDayRepository workDayRepository) {
+
+        logger.info("createFullWorkYearWorkMonthWorkDaySamplesForUser");
+
+        List<Integer> rangeYears = rangeYears("2019", "2021");
+        List<WorkYear> workYears = new ArrayList<>();
+
+        for (Integer year : rangeYears) {
+            logger.info("year : " + year);
+            //WorkYear workYear = workYearRepository.findByYear(year);
+            WorkYear workYear = new WorkYear();
+            //if (workYear == null) {
+            //logger.info("workyear is null");
+            //workYear = new WorkYear();
+            //workYear.setId()
+            workYear.setYear(year);
+            // new list of months for each year
+            List<WorkMonth> workMonths = new ArrayList<>();
+
+            // months
+            for (int i = 1; i <= 12; i++) {
+                List<Workday> workdays = createSampleStarterWorkdaysForEachMonth(i, year);
+                logger.info("this month : " + i + " of the year " + year + " doesnt exist yet");
+                WorkMonth workMonth = new WorkMonth();
+                workMonth.setId(Integer.toString(i));
+                workMonth.setMonth(i);
+                workMonth.setWorkdays(workdays);
+
+                workMonths.add(workMonth);
+            }
+
+            workYear.setWorkmonths(workMonths);
+            workYears.add(workYear);
+
+            //workYearRepository.save(workYear);
+        }
+        //}
+
+        user.setWorkYears(workYears);
+
+        userRepository.save(user);
+
+    }
 
 }
