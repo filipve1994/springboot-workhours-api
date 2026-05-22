@@ -1,5 +1,5 @@
 # our base build image
-FROM maven:3.6.0-jdk-8 as maven
+FROM maven:3.8.6-jdk-8 as maven
 
 # copy the project files
 COPY ./pom.xml ./pom.xml
